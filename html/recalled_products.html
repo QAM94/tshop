@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Meta -->
+    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta name="author" content="ThemePixels">
+    <title>Recall</title>
+    <link rel="shortcut icon" type="image/png" href="../public/assets/img/favicon.png"/>
+    <link href="../public/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="../public/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="../public/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
+    <link href="../public/lib/pickerjs/picker.min.css" rel="stylesheet">
+    <link href="../public/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="../public/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
+
+    <!-- DashForge CSS -->
+    <link rel="stylesheet" href="../public/assets/css/custom.css">
+    <link rel="stylesheet" href="../public/assets/css/dashforge.css">
+    <link rel="stylesheet" href="../public/assets/css/dashforge.dashboard.css">
+    <link rel="stylesheet" href="../public/assets/css/dashforge.auth.css">
+    <!-- DashForge CSS -->
+    <link rel="stylesheet" href="../public/assets/css/dashforge.profile.css">
+    <link href="../public/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="../public/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="../public/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+<body>
+
+<aside class="aside aside-fixed">
+    <div class="aside-header">
+        <a href="dashboard.html" class="aside-logo"><img src="../public/assets/img/recall-logo.png" alt=""></a>
+        <a href="" class="aside-menu-link">
+            <i data-feather="menu"></i>
+            <i data-feather="x"></i>
+        </a>
+    </div>
+    <div class="aside-body">
+        <div class="aside-loggedin">
+            <div class="d-flex align-items-center justify-content-start">
+                <a href="" class="avatar"><img src="../public/assets/img/img1.png" class="rounded-circle" alt=""></a>
+            </div>
+            <div class="aside-loggedin-user">
+                <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2 collapsed" data-toggle="collapse" aria-expanded="false">
+                    <h6 class="tx-semibold mg-b-0">Katherine Pechon</h6>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </a>
+                <p class="tx-color-03 tx-12 mg-b-0">Administrator</p>
+            </div>
+            <div class="collapse" id="loggedinMenu" style="">
+                <ul class="nav nav-aside mg-b-0">
+                    <li class="nav-item"><a href="user_profile.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg> <span>Edit Profile</span></a></li>
+                    <li class="nav-item">
+                        <a href="javascript:" data-toggle="modal" data-target="#changePasswordModal" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+                                <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                                <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                            </svg>
+                            <span>Change Password</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <ul class="nav nav-aside">
+            <li class="nav-item">
+                <a href="dashboard.html" class="nav-link">
+                    <i data-feather="shopping-bag"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="recalled_products.html" class="nav-link active">
+                    <i data-feather="shopping-cart"></i>
+                    <span>Recalled Products</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="customer.html" class="nav-link">
+                    <i data-feather="user"></i>
+                    <span>Customer</span>
+                </a>
+            </li>
+            <li class="nav-item with-sub">
+                <a href="" class="nav-link"><i data-feather="settings"></i> <span>Settings</span></a>
+                <ul>
+                    <li><a href="email_template.html">Email Template</a></li>
+                    <li><a href="sms_template.html">SMS Template</a></li>
+					<li><a href="#">Logout of All Sessions</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="content ht-100v pd-0">
+    <div class="content-body">
+        <div class="container pd-x-0 tx-13">
+            <div class="d-flex align-items-center justify-content-between position-relative">
+                <h4 id="section1" class="mg-b-0">Recalled Products</h4>
+                <button class="btn btn-success add-class" type="button" id="dropdownMenuButton">
+                    Filter Products
+                </button>
+            </div>
+            <div class="filter-dropdown">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Product Name</label>
+                            <input type="text" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">Batch ID</label>
+                            <select class="form-control" id="exampleFormControlSelect2">
+                                <option>Select Batch ID</option>
+                                <option>2627</option>
+                                <option>3738</option>
+                                <option>5657</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Recall Date</label>
+                            <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/15/2018" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-right d-flex justify-content-end align-items-center">
+                        <button type="button" class="btn btn-success remove-class">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-xs mt-2">
+                <div class="col-sm-12 col-lg-12">
+                    <div class="card card-body dataTableBox">
+                        <table id="example1" class="table custom-recalled">
+                            <thead>
+                            <tr>
+                                <th class="">Product Name</th>
+                                <th class="">Ref URL</th>
+                                <th class="">Date of recall</th>
+                                <th class="">Brand name</th>
+                                <th class="">Reason for recall</th>
+                                <th class="">Status</th>
+                                <th class="">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apple</td>
+                                <td>www.recallsafe.com</td>
+                                <td>12/02/2020</td>
+                                <td>Recall Safe</td>
+                                <td>Reason Detail</td>
+                                <td>
+                                    <span class="success-circle"></span>
+                                    Email
+                                    <span class="tooltiptext">Email has been sand</span>
+                                </td>
+                                <td class="position-relative">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <div class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -165px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#viewModal" data-toggle="modal">View Details</a>
+                                        <a class="dropdown-item" href="customer_details.html">Customer Details</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickEmail" data-toggle="modal">Quick Email</a>
+                                        <a class="dropdown-item" href="#modalCustomEmail" data-toggle="modal">Compose Email</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#modalQuickSms" data-toggle="modal">Quick SMS</a>
+                                        <a class="dropdown-item" href="#modalCustomSms" data-toggle="modal">Compose SMS</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- container -->
+    </div><!-- content-body -->
+</div><!-- content -->
+
+<!--//// modal ////-->
+<div class="modal fade" id="modalCustomEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered set_modal_width" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title mt-1" id="exampleModalLabel2">Type Custom Email</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <form class="w-100 d-inline-block">
+                    <div class="row">
+					<div class="col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="" class="mb-1 d-block">Subject</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="" class="mb-1 d-block">Message</label>
+                                <textarea class="w-100" name="" id="" placeholder="" cols="30" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success float-right" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--///-->
+<div class="modal fade" id="modalQuickEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered set_modal_width" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title mt-1" id="exampleModalLabel3">Use Email Type</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <form class="w-100 d-inline-block">
+                    <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <label for="" class="mb-1 d-block">Template</label>
+                            <select class="custom-select w-165 mr-2 font-weight-500">
+                                <option selected="">Select Template</option>
+                                <option value="1">Template One</option>
+                                <option value="2">Template Two</option>
+                                <option value="3">Template Three</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="" class="mb-1 d-block">Message</label>
+                                <textarea class="w-100" name="" placeholder="" cols="30" rows="3" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success float-right" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//// modal ////-->
+
+<!--//// modal ////-->
+<div class="modal fade" id="modalCustomSms" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered set_modal_width" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title mt-1" id="exampleModalLabel2">Type Custom SMS</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <form class="w-100 d-inline-block">
+                    <div class="row">
+					<div class="col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="" class="mb-1 d-block">Name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="" class="mb-1 d-block">Message</label>
+                                <textarea class="w-100" name="" id="" placeholder="" cols="30" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success float-right" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--///-->
+<div class="modal fade" id="modalQuickSms" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered set_modal_width" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title mt-1" id="exampleModalLabel3">Use SMS Type</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <form class="w-100 d-inline-block">
+                    <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <label for="" class="mb-1 d-block">Template</label>
+                            <select class="custom-select w-165 mr-2 font-weight-500">
+                                <option selected="">Select Template</option>
+                                <option value="1">Template One</option>
+                                <option value="2">Template Two</option>
+                                <option value="3">Template Three</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="" class="mb-1 d-block">Message</label>
+                                <textarea class="w-100" name="" placeholder="" cols="30" rows="3" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success float-right" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//// modal ////-->
+
+
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title mt-1" id="exampleModalLabel5">View Details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row row-sm">
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-center justify-content-between pd-t-10 pd-b-10 border-bottom">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Product Name</label>
+                            <p class="mg-b-0 tx-14">Finance</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-center justify-content-between pd-t-10 pd-b-10 border-bottom">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Ref URL</label>
+                            <p class="mg-b-0 tx-14">www.recallsafe.com</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-center justify-content-between pd-t-10 pd-b-10 border-bottom">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Date of Recall</label>
+                            <p class="mg-b-0 tx-14">12/02/2020</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-center justify-content-between pd-t-10 pd-b-10 border-bottom">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Brand name</label>
+                            <p class="mg-b-0 tx-14">Recall Safe</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-center justify-content-between pd-t-10 pd-b-10 border-bottom">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Reason for recall</label>
+                            <p class="mg-b-0 tx-14">Reason Detail</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-center justify-content-between pd-t-10 pd-b-10 border-bottom">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Lot number</label>
+                            <p class="mg-b-0 tx-14">2356484</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-center justify-content-between pd-t-10 pd-b-10 border-bottom">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Reason for recall description</label>
+                            <p class="mg-b-0 tx-14">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="d-flex align-items-start justify-content-between pd-t-10 pd-b-10">
+                            <label class="tx-12 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-0">Stores</label>
+                            <div class="retailerListScroll">
+                                <p class="mg-b-0 tx-14">Multiple Selector</p>
+                                <p class="mg-b-0 tx-14">Multiple Selector</p>
+                                <p class="mg-b-0 tx-14">Multiple Selector</p>
+                                <p class="mg-b-0 tx-14">Multiple Selector</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- row -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--///-->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title mt-1">Change Password</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="change-password">
+                <form class="w-100 d-inline-block" id="changePasswordForm" action="http://localhost/recall-safety/public/users-change-password">
+                    <input type="hidden" name="_token" value="2vswKn0xupjUKfelvNZhBe1jMVYcmgduvmMjMblh">                    <div class="row">
+                    <div class="col-sm-12">
+                        <p style="color:red;" id="ajax-error"></p>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group mb-3">
+                            <label for="name" class="mb-1 d-block">Old Password</label>
+                            <input type="password" name="old_password" id="old_password" class="form-control" required="">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group mb-3">
+                            <label for="contact" class="mb-1 d-block">New Password</label>
+                            <input type="password" name="new_password" id="new_password" class="form-control" required="">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group mb-3">
+                            <label for="address" class="mb-1 d-block">Confirm New Password</label>
+                            <input type="password" id="confirm_new_password" class="form-control" required="">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 text-right">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//// modal ////-->
+
+<script src="../public/lib/jquery/jquery.min.js"></script>
+<script src="../public/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../public/lib/feather-icons/feather.min.js"></script>
+<script src="../public/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="../public/lib/pickerjs/picker.min.js"></script>
+<script src="../public/lib/jquery.flot/jquery.flot.js"></script>
+<script src="../public/lib/jquery.flot/jquery.flot.stack.js"></script>
+<script src="../public/lib/jquery.flot/jquery.flot.resize.js"></script>
+<script src="../public/lib/chart.js/Chart.bundle.min.js"></script>
+<script src="../public/lib/jqvmap/jquery.vmap.min.js"></script>
+<script src="../public/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
+
+<script src="../public/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../public/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+<script src="../public/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../public/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+
+<script src="../public/assets/js/dashforge.js"></script>
+<script src="../public/assets/js/dashforge.aside.js"></script>
+<script src="../public/assets/js/chart.chartjs.js"></script>
+<script src="../public/assets/js/dashforge.sampledata.js"></script>
+
+<!-- append theme customizer -->
+<script src="../public/assets/js/js.cookie.js"></script>
+<script src="../public/assets/js/dashforge.settings.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+<script>
+
+    $(function(){
+        'use strict'
+        $('#example1').DataTable({
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
+        });
+
+        $('.click-popup').on('click', function () {
+            $('.message-box').toggleClass('open-message');
+        });
+        $('.message-box li a').on('click', function () {
+            $('.message-box').removeClass('open-message');
+        });
+
+        $('.click-popup1').on('click', function () {
+            $('.message-box1').toggleClass('open-message');
+        });
+        $('.message-box1 li a').on('click', function () {
+            $('.message-box1').removeClass('open-message');
+        });
+
+        //// filter addClass & removeClass ////
+        $('.add-class').on('click', function(){
+            $('.filter-dropdown').toggleClass('filter-active');
+        });
+        // $('.remove-class').on('click', function(){
+        //     $('.filter-dropdown').removeClass('filter-active');
+        // });
+        //// filter addClass & removeClass ////
+
+        // $('#datepicker6').datepicker({
+        //     numberOfMonths: 2
+        // });
+
+    });
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left'
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+    });
+
+</script>
+
+</body>
+</html>
