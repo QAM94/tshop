@@ -1,4 +1,4 @@
-<form class="w-100 d-inline-block" enctype="multipart/form-data" method="POST" id="editForm"
+<form class="w-100 d-inline-block" method="POST" id="editForm"
       action="{{ route($module.'.edit' , ['id' => $data->id]) }}">
     @csrf
 

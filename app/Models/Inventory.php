@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 class Inventory extends Model
 {
 
-    protected $fillable = ['product_id', 'quantity', 'measure', 'unit'];
+    protected $fillable = ['product_id', 'quantity', 'length', 'unit'];
 
     public $timestamps = FALSE;
 
@@ -27,6 +27,12 @@ class Inventory extends Model
     public function getByProduct($product_id)
     {
         return $this->where(['product_id' => $product_id])->first();
+    }
+
+    public static function updateQty($product_id, $qty, $type='sale') {
+        $rec = self::where(['product_id' => $product_id])->find();
+        $rec->quantity = $type == 'sale' ? $rec->quantity - $qty : $rec->quantity + $qty;
+        $rec->save();
     }
 
 }

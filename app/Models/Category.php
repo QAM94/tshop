@@ -107,7 +107,7 @@ class Category extends Model
     public function getColumnsForDataTable()
     {
         $data = [
-            ['data' => 'parent.title', 'name' => 'parent.title', 'title' => 'Parent'],
+            ['data' => 'parent', 'name' => 'parent', 'title' => 'Parent'],
             ['data' => 'title', 'name' => 'title', 'title' => 'Name'],
             ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?',
                 'searchable' => 'false', 'nosort' => 'true'],

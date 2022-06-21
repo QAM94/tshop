@@ -22,7 +22,6 @@ class ProductsController extends Controller
         $this->category_product_model = new CategoryProduct();
         $this->inventory_model = new Inventory();
         $this->shop_model = new Shop();
-        $this->dataAssign['_model'] = $this->primary_model;
         $this->dataAssign['module'] = 'products';
         $this->actions = ['edit'];
         $this->show_status_in_list[] = ['column_name' => 'is_active' , 'column_data' => 'is_active'];

@@ -1,4 +1,4 @@
-<form class="w-100 d-inline-block" enctype="multipart/form-data" method="POST" id="editForm"
+<form class="w-100 d-inline-block" method="POST" id="editForm"
       action="{{ route($module.'.edit' , ['id' => $data->id]) }}">
     @csrf
 
@@ -22,13 +22,6 @@
             <div class="form-group mb-3">
                 <label for="" class="mb-1 d-block">Name</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="" value="{{ $data->name }}">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group mb-3">
-                <label for="" class="mb-1 d-block">Receipt ID</label>
-                <input type="text" class="form-control" name="receipt_id" id="receipt_id" placeholder=""
-                       value="{{ $data->receipt_id }}">
             </div>
         </div>
         <div class="col-sm-12 text-right">

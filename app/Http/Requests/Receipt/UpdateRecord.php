@@ -24,8 +24,7 @@ class UpdateRecord extends FormRequest
     public function rules()
     {
         return [
-            'shop_id' => 'nullable|exists:shops,id,deleted_at,NULL',
-            'customer_id' => 'nullable|exists:customers,id,deleted_at,NULL'
+            'shop_id' => 'nullable|exists:shops,id,deleted_at,NULL'
         ];
     }
 }

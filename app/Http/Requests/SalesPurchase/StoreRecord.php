@@ -26,7 +26,7 @@ class StoreRecord extends FormRequest
         return [
             'shop_id' => 'nullable|exists:shops,id,deleted_at,NULL',
             'product_id' => 'nullable|exists:products,id,deleted_at,NULL',
-            'type' => 'required|in:sales,purchase',
+            'type' => 'required|in:sale,purchase',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric'
         ];

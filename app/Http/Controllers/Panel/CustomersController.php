@@ -28,15 +28,14 @@ class CustomersController extends Controller
         return view($this->layout_base . '.' . $this->dataAssign['module'] . '.' . __FUNCTION__, $this->dataAssign);
     }
 
-    public function store(StoreRecord $storeCustomer)
+    public function form()
     {
-        if (auth()->user()->role == 'agent') {
-            $shop_id = auth()->user()->shop_id;
-        } else {
-            $shop_id = isset(auth()->user()->store->id) ? auth()->user()->store->id : 0;
-        }
-        $storeCustomer->merge(['shop_id' => $shop_id]);
-        return $this->primary_model->create($storeCustomer->only($this->primary_model->getFillable()));
+        return view($this->layout_base . '.' . $this->dataAssign['module'] . '.' . __FUNCTION__, $this->dataAssign);
+    }
+
+    public function store(StoreRecord $storeRecord)
+    {
+        return $this->primary_model->createRecord($storeRecord);
     }
 
     public function edit($id)

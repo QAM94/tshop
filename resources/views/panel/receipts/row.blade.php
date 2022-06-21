@@ -7,7 +7,7 @@
                 @foreach($products as $product)
                     <option value="{{ $product->id }}" data-price="{{ $product->price }}">
                         {{ $product->title }}
-                        ({{ $product->price }}/{{ $product->inventory->measure.$product->inventory->unit }})
+                        ({{ $currency.$product->price }} per {{ $product->inventory->unit }})
                     </option>
                 @endforeach
             </select>
@@ -16,7 +16,8 @@
     <div class="col-sm-2">
         <div class="form-group mb-3">
             <label class="mb-1 d-block">Quantity</label>
-            <input type="number" name="quantity[]" class="form-control proQty" min="1" max="99">
+            <input type="number" name="quantity[]" class="form-control proQty" min="1"
+                   max="{{ $product->inventory->quantity }}" step="any">
         </div>
     </div>
     <div class="col-sm-2">

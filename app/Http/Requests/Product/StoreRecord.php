@@ -30,7 +30,7 @@ class StoreRecord extends FormRequest
             'description' => 'required|max:255',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'measure' => 'required|numeric'
+            'length' => 'required|numeric'
         ];
     }
 }

@@ -28,16 +28,19 @@ class Receipt extends Model
 
     public function getColumnsForDataTable()
     {
-        $data = [
-            ['data' => 'uid', 'name' => 'uid', 'title' => 'Receipt ID'],
-            ['data' => 'shop.name', 'name' => 'shop.name', 'title' => 'Shop'],
+        $data[] = ['data' => 'uid', 'name' => 'uid', 'title' => 'Receipt ID'];
+        if(!isset(auth()->user()->store->id)) {
+            $data[] = ['data' => 'shop.name', 'name' => 'shop.name', 'title' => 'Shop'];
+        }
+        array_push($data,
             ['data' => 'customer.name', 'name' => 'customer.name', 'title' => 'Customer'],
             ['data' => 'sub_total', 'name' => 'sub_total', 'title' => 'Sub Total'],
             ['data' => 'discount', 'name' => 'discount', 'title' => 'Discount'],
             ['data' => 'total', 'name' => 'total', 'title' => 'Total'],
             ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?', 'searchable' => 'false', 'nosort' => 'true'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
-        ];
+        );
+
         return json_encode($data);
     }
 

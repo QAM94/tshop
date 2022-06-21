@@ -23,6 +23,6 @@ class HeaderComposer
      */
     public function compose(View $view)
     {
-        $view->with('currency', 'Rs.');
+        //
     }
 }

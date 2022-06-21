@@ -32,7 +32,8 @@ class Controller extends BaseController
     protected $show_toggle_in_list = [];
     protected $show_url_in_list = [];
     protected $hasManualSearch = [];
-    protected $hasRawCodeColumn = ['recall_date'];
+    protected $hasRawCodeColumn = ['price','created_at'];
+    protected $currency = '$';
 
     protected $actions = ['add', 'edit', 'delete'];
 
@@ -46,21 +47,19 @@ class Controller extends BaseController
 
     final function makeDataTable($data, $actions, $module)
     {
-
         $buttons = empty($this->makeCustomActionButtonsForNestedTables)
             ? $this->makeCustomActionButtons($module)
             : $this->makeCustomActionButtonsForNestedTables;
 
 
         $data_table = Datatables::of($data)->order(function ($query) {
-
             $query->orderBy('created_at', 'desc');
-
         });
 
         if (!empty($this->rawColumns)) {
             foreach ($this->rawColumns as $rawCol) {
-                $compact_arr = $rawCol == 'actions' ? compact('module', 'buttons', 'actions') : compact('module');
+                $compact_arr = $rawCol == 'actions' ?
+                    compact('module', 'buttons', 'actions') : compact('module');
                 $view = $this->layout_base . '.' .$this->{$rawCol.'_view'};
                 $data_table->addColumn($rawCol, function ($row) use ($view, $compact_arr) {
                     $compact_arr['row'] = $row;
@@ -70,13 +69,17 @@ class Controller extends BaseController
         }
 
         foreach ($this->hasRawCodeColumn as $code_col) {
-
             $data_table->editColumn($code_col, function ($row) use ($code_col) {
-
-                if ($code_col == 'recall_date') {
-                    return date('m/d/Y',strtotime($row->$code_col));
+                if ($code_col == 'parent') {
+                    return !empty($row->parent) ? $row->parent->title : 'N/A';
                 }
-
+                if ($code_col == 'price') {
+                    return $this->currency.$row->price;
+                }
+                if ($code_col == 'created_at') {
+                    return !empty($row->created_at) ? date('jS M Y h:i A',
+                        strtotime($row->created_at)) : 'N/A';
+                }
             });
         }
 

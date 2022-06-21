@@ -1,4 +1,4 @@
-<form class="w-100 d-inline-block" enctype="multipart/form-data" method="POST" id="editForm"
+<form class="w-100 d-inline-block" method="POST" id="editForm"
       action="{{ route($module.'.edit' , ['id' => $data->id]) }}">
     @csrf
 
@@ -57,8 +57,8 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group mb-3">
-                <label class="mb-1 d-block">Measure Length</label>
-                <input type="text" name="measure" id="measure" class="form-control" value="{{ @$data->inventory->measure }}">
+                <label class="mb-1 d-block">Length</label>
+                <input type="text" name="length" id="length" class="form-control" value="{{ @$data->inventory->length }}">
             </div>
         </div>
         <div class="col-sm-6">

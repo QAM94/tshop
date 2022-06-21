@@ -28,4 +28,8 @@
         @include('panel.includes.modal_view')
     </div>
 @endsection
+@push('custom-scripts')
+        <script src="{{ asset('js/form.js') }}"></script>
+@endpush
+
 

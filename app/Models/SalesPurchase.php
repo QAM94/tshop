@@ -27,7 +27,7 @@ class SalesPurchase extends Model
             ['data' => 'type', 'name' => 'type', 'title' => 'Type'],
             ['data' => 'quantity', 'name' => 'quantity', 'title' => 'Quantity'],
             ['data' => 'price', 'name' => 'price', 'title' => 'Price'],
-            ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?', 'searchable' => 'false', 'nosort' => 'true'],
+            ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created On'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
         ];
         return json_encode($data);
@@ -54,7 +54,9 @@ class SalesPurchase extends Model
 
     public function createRecord($request)
     {
-        return $this->create($request->only($this->getFillable()));
+        $record = $this->create($request->only($this->getFillable()));
+        Inventory::updateQty($request->product_id, $request->quantity, $request->type);
+        return $record;
     }
 
     public function updateRecord($request)
@@ -75,5 +77,15 @@ class SalesPurchase extends Model
     public function getRecords()
     {
         return $this->where('is_active', 1)->get();
+    }
+
+    public function createSale($product, $quantity) {
+        return $this->create([
+            'shop_id' => $product->shop_id,
+            'product_id' => $product->id,
+            'type' => 'sale',
+            'quantity' => $quantity,
+            'price' => $product->price
+        ]);
     }
 }

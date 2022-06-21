@@ -35,7 +35,7 @@
     <div class="col-sm-12">
         <div class="form-group mb-3">
             <button type="button" class="btn btn-success addRow" style="padding: 3px 15px; float: right;">
-                <i class="ion-ios-add-circle-outline"></i> Add Row
+                <i class="ion-ios-add-circle-outline"></i> Add Product
             </button>
             <br/>
             <!-- <button type="button" class="btn btn-danger delRow" style="padding: 3px 5px;">
@@ -56,7 +56,7 @@
                                 <option {{ $row->product_id == $product->id ? 'selected' : '' }}
                                         value="{{ $product->id }}" data-price="{{ $product->price }}">
                                     {{ $product->title }}
-                                    ({{ $product->price }}/{{ $product->inventory->measure.$product->inventory->unit }})
+                                    ({{ $currency.$product->price }} per {{$product->inventory->unit }})
                                 </option>
                             @endforeach
                         </select>
@@ -66,7 +66,8 @@
                     <div class="form-group mb-3">
                         <label class="mb-1 d-block">Quantity</label>
                         <input type="number" name="quantity[]" class="form-control proQty"
-                               value="{{ $row->quantity }}" min="1" max="99">
+                               value="{{ $row->quantity }}" min="1" max="{{ $product->inventory->quantity }}"
+                               step="any">
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -87,7 +88,7 @@
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
         <p class="col-sm-2">
             <input type="number" class="form-control" name="discount" id="discount" min="0"
-                   max="{{ $data->sub_total }}" value="{{ $data->discount ? $data->discount : 0 }}">
+                   max="{{ $data->sub_total }}" value="{{ $data->discount ? $data->discount : 0 }}" step="any">
         </p>
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
         <p class="col-sm-2">
@@ -107,4 +108,8 @@
         </div>
     </div>
 </form>
-@include('panel.receipts.scripts')
+@push('custom-scripts')
+    @once
+        <script src="{{ asset('js/form.js') }}"></script>
+    @endonce
+@endpush

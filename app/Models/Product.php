@@ -29,6 +29,10 @@ class Product extends Model
         return $this->hasOne(Inventory::class, 'product_id');
     }
 
+    public function shop() {
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
+
     public function scopeSearch($query, $value)
     {
         return $query->where('title', 'like', '%' . $value . '%');
@@ -36,7 +40,11 @@ class Product extends Model
 
     public function getColumnsForDataTable()
     {
-        $data = [
+        $data = [];
+        if(!isset(auth()->user()->store->id)) {
+            $data[] = ['data' => 'shop.name', 'name' => 'shop.name', 'title' => 'Shop'];
+        }
+        array_push($data,
             ['data' => 'category.title', 'name' => 'category.title', 'title' => 'Category'],
             ['data' => 'sku', 'name' => 'sku', 'title' => 'SKU'],
             ['data' => 'title', 'name' => 'title', 'title' => 'Name'],
@@ -44,7 +52,8 @@ class Product extends Model
             ['data' => 'price', 'name' => 'price', 'title' => 'Price'],
             ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?', 'searchable' => 'false', 'nosort' => 'true'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
-        ];
+        );
+
         return json_encode($data);
     }
 
@@ -59,7 +68,7 @@ class Product extends Model
 
     public function ajaxListing()
     {
-        return $this->query()->with('category');
+        return $this->query()->with(['category','shop']);
     }
 
     public function findRecord($id)

@@ -26,17 +26,20 @@ class ReceiptDetail extends Model
         $product_model = new Product();
         foreach($request['product_id'] as $key => $val) {
             $product = $product_model->findRecord($val);
-            $this->updateOrCreate([
-                'receipt_id' => $request->id,
-                'product_id' => $val,
-            ], [
-                'quantity' => $request['quantity'][$key],
-                'unit_price' => $product->price,
-                'unit' => $product->inventory->unit,
-                'price' => $product->price * $request['quantity'][$key]
-            ]);
-            $product->inventory->quantity = $product->inventory->quantity - $request['quantity'][$key];
-            $product->inventory->save();
+            if($val > 0) {
+                $this->updateOrCreate([
+                    'receipt_id' => $request->id,
+                    'product_id' => $val,
+                ], [
+                    'quantity' => $request['quantity'][$key],
+                    'unit_price' => $product->price,
+                    'unit' => $product->inventory->unit,
+                    'price' => $product->price * $request['quantity'][$key]
+                ]);
+                Inventory::updateQty($val, $request['quantity'][$key]);
+                $sale_model = new SalesPurchase();
+                $sale_model->createSale($product, $request['quantity'][$key]);
+            }
         }
     }
 

@@ -150,6 +150,12 @@ Route::group(['middleware' => ['auth', 'role', 'logout']], function () {
                     'url' => 'by-shop/{shop_id}',
                     'http_method' => 'get'
                 ],
+                [
+                    'route_name' => 'getFrom',
+                    'method' => 'form',
+                    'url' => 'form',
+                    'http_method' => 'get'
+                ],
             ]
         ],
 

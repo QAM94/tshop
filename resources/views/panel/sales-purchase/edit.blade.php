@@ -35,7 +35,7 @@
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Type</label>
                 <select name="type" id="type" class="form-control sel2">
-                    <option value="sales" {{ $data->type == 'sales' ? 'selected' : '' }}>Sales</option>
+                    <option value="sale" {{ $data->type == 'sale' ? 'selected' : '' }}>Sale</option>
                     <option value="purchase" {{ $data->type == 'purchase' ? 'selected' : '' }}>Purchase</option>
                 </select>
             </div>

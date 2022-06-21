@@ -22,7 +22,6 @@ class ReceiptsController extends Controller
         $this->shop_model = new Shop();
         $this->customer_model = new Customer();
         $this->product_model = new Product();
-        $this->dataAssign['_model'] = $this->primary_model;
         $this->dataAssign['module'] = 'receipts';
         $this->actions = ['view', 'edit'];
         $this->show_status_in_list[] = ['column_name' => 'is_active', 'column_data' => 'is_active'];
@@ -57,6 +56,10 @@ class ReceiptsController extends Controller
 
     public function store(StoreRecord $storeRecord)
     {
+        if($storeRecord->customer_id == 'new'){
+            $customer = $this->customer_model->createRecord($storeRecord);
+            $storeRecord->merge(['customer_id' => $customer->id]);
+        }
         $record = $this->primary_model->createRecord($storeRecord);
         $storeRecord->merge(['id' => $record->id]);
         $this->detail_model->updateRecord($storeRecord);

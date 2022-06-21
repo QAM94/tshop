@@ -31,10 +31,8 @@ class SalesPurchaseController extends Controller
         $this->primary_model = new SalesPurchase();
         $this->shop_model = new Shop();
         $this->product_model = new Product();
-        $this->dataAssign['_model'] = $this->primary_model;
         $this->dataAssign['module'] = 'sales-purchase';
         $this->actions = ['view', 'edit'];
-        $this->show_status_in_list[] = ['column_name' => 'is_active', 'column_data' => 'is_active'];
         $this->dataAssign['route_name_for_listing'] = $this->dataAssign['module'] . '.ajaxListing';
         $this->dataAssign['data_table_columns'] = $this->primary_model->getColumnsForDataTable();
     }

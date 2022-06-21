@@ -15,9 +15,9 @@ class CategoriesController extends Controller
     public function __construct()
     {
         $this->primary_model = new Category();
-        $this->dataAssign['_model'] = $this->primary_model;
         $this->dataAssign['module'] = 'categories';
         $this->actions = ['edit'];
+        $this->hasRawCodeColumn = ['parent'];
         $this->show_status_in_list[] = ['column_name' => 'is_active' , 'column_data' => 'is_active'];
         $this->dataAssign['route_name_for_listing'] = $this->dataAssign['module'] . '.ajaxListing';
         $this->dataAssign['data_table_columns'] = $this->primary_model->getColumnsForDataTable();

@@ -1,4 +1,4 @@
-<form class="w-100 d-inline-block" enctype="multipart/form-data" method="POST" action="{{ route($module.'.add') }}"
+<form class="w-100 d-inline-block" method="POST" action="{{ route($module.'.add') }}"
       id="addForm">
     @csrf
     <div class="row">
@@ -21,15 +21,7 @@
                 <input type="text" name="title" id="title" class="form-control" placeholder="">
             </div>
         </div>
-        <div class="col-sm-6 d-flex align-items-center">
-            <div class="custom-control custom-switch pl-0">
-                <label for="customSwitch2" class="switch-active">Status</label>
-                <input type="hidden" name='is_active' value="0">
-                <input type="checkbox" class="custom-control-input" id="customSwitch2" name='is_active' value="1">
-                <label for="customSwitch2" class="custom-control-label ml-3"></label>
-            </div>
-        </div>
-        <div class="col-sm-6 text-right">
+        <div class="col-sm-12 text-right">
             <button class="btn btn-success" type="submit">Submit</button>
         </div>
     </div>
