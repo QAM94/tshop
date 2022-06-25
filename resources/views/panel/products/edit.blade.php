@@ -43,38 +43,22 @@
                 <input type="text" name="title" id="title" class="form-control" value="{{ $data->title }}">
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Quantity</label>
                 <input type="text" name="quantity" id="quantity" class="form-control" value="{{ @$data->inventory->quantity }}">
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Price</label>
                 <input type="text" name="price" id="price" class="form-control" value="{{ $data->price }}">
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Length</label>
                 <input type="text" name="length" id="length" class="form-control" value="{{ @$data->inventory->length }}">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group mb-3">
-                <label class="mb-1 d-block">Unit</label>
-                <select name="unit" id="unit" class="form-control sel2">
-                    <option {{ @$data->inventory->unit == 'meter' ? 'selected' : '' }} value="meter" >
-                        Meter
-                    </option>
-                    <option {{ @$data->inventory->unit == 'guz' ? 'selected' : '' }} value="guz" >
-                        Guz
-                    </option>
-                    <option {{ @$data->inventory->unit == 'inch' ? 'selected' : '' }} value="inch" >
-                        Inch
-                    </option>
-                </select>
             </div>
         </div>
         <div class="col-sm-12">
@@ -97,25 +81,3 @@
         </div>
     </div>
 </form>
-
-<script type="text/javascript">
-
-    function readURL(input) {
-
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#store_logo').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $("#file-upload2").change(function () {
-        readURL(this);
-    });
-
-</script>

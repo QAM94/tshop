@@ -2,6 +2,12 @@
       id="addForm">
     @csrf
     <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">Receipt No</label>
+                <input type="text" name="receipt_no" id="receipt_no" class="form-control" />
+            </div>
+        </div>
         <div class="col-sm-6">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Shop</label>

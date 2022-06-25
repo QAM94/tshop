@@ -33,7 +33,7 @@ class Controller extends BaseController
     protected $show_url_in_list = [];
     protected $hasManualSearch = [];
     protected $hasRawCodeColumn = ['price','created_at'];
-    protected $currency = '$';
+    protected $currency = 'SR';
 
     protected $actions = ['add', 'edit', 'delete'];
 

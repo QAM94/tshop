@@ -124,6 +124,12 @@ Route::group(['middleware' => ['auth', 'role', 'logout']], function () {
                     'url' => 'by-shop/{shop_id}',
                     'http_method' => 'get'
                 ],
+                [
+                    'route_name' => 'shopList',
+                    'method' => 'showByShop',
+                    'url' => 'shop/{shop_id}',
+                    'http_method' => 'get'
+                ],
             ]
         ],
         ['module_name' => 'receipts', 'controller_name' => 'Receipts',

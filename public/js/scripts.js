@@ -172,3 +172,8 @@ $(document).on('submit', '#editForm', function (event) {
 $('.modal').on('hidden.bs.modal', function () {
     $('.modal_empty').html('');
 });
+
+$(document).ready(function() {
+    $('.sel2').select2();
+});
+

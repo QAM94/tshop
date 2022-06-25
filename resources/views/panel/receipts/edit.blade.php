@@ -3,6 +3,13 @@
     @csrf
 
     <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">Receipt No</label>
+                <input type="text" name="receipt_no" id="receipt_no" class="form-control"
+                       value="{{ $data->receipt_no }}" />
+            </div>
+        </div>
         <div class="col-sm-6">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Shop</label>
@@ -47,7 +54,7 @@
     <div id="detailsDiv">
         @foreach($data->details as $row)
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                     <div class="form-group mb-3">
                         <label class="mb-1 d-block">Product</label>
                         <select name="product_id[]" class="form-control proSel">
@@ -56,7 +63,6 @@
                                 <option {{ $row->product_id == $product->id ? 'selected' : '' }}
                                         value="{{ $product->id }}" data-price="{{ $product->price }}">
                                     {{ $product->title }}
-                                    ({{ $currency.$product->price }} per {{$product->inventory->unit }})
                                 </option>
                             @endforeach
                         </select>
@@ -64,10 +70,16 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group mb-3">
+                        <label class="mb-1 d-block">Unit Price</label>
+                        <input type="number" name="unit_price[]" class="form-control proUPrice" min="1"
+                               value="{{ $row->unit_price }}" step="any">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group mb-3">
                         <label class="mb-1 d-block">Quantity</label>
                         <input type="number" name="quantity[]" class="form-control proQty"
-                               value="{{ $row->quantity }}" min="1" max="{{ $product->inventory->quantity }}"
-                               step="any">
+                               value="{{ $row->quantity }}" min="1" step="any">
                     </div>
                 </div>
                 <div class="col-sm-2">

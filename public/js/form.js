@@ -40,18 +40,23 @@ $(document).on('change', '#customer_id', function () {
 });
 
 $(document).on('change', '.proSel', function () {
+    let unitPrice = $(this).find(':selected').data('price');
+    $(this).parent().parent().parent().find('.proUPrice').val(unitPrice);
     calculateBill($(this));
 });
 
 $(document).on('keyup keypress change', '.proQty', function () {
-    $(this).parent().parent().parent().find('.proSel').change();
+    calculateBill($(this));
+});
+
+$(document).on('keyup keypress change', '.proUPrice', function () {
+    calculateBill($(this));
 });
 
 function calculateBill(selector) {
-    let unitPrice = selector.find(':selected').data('price');
+    let unitPrice = selector.parent().parent().parent().find('.proUPrice').val();
     let qty = selector.parent().parent().parent().find('.proQty').val();
-    let price = selector.parent().parent().parent().find('.proPrice');
-    price.val(unitPrice * qty);
+    selector.parent().parent().parent().find('.proPrice').val(unitPrice * qty);
     let sum = 0;
     $(".proPrice").each(function () {
         sum += +$(this).val();

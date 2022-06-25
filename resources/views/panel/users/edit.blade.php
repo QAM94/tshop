@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group"><label>Shop</label>
-                <select class="form-control" name="shop_id" id="shop_id">
+                <select class="form-control sel2" name="shop_id" id="shop_id">
                     @foreach($shops as $shop)
                         <option {{ $data->shop->id == $shop->id ? 'selected' : '' }}
                                 value="{{ $shop->id }}">

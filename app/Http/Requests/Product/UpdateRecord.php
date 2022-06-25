@@ -28,7 +28,7 @@ class UpdateRecord extends FormRequest
             'sku' => 'required|unique:products,sku,'.$this->id.',id,deleted_at,NULL|max:99',
             'title' => 'required|unique:products,title,'.$this->id.',id,deleted_at,NULL|max:255',
             'description' => 'required|max:255',
-            'price' => 'required|numeric|max:1000000',
+            'price' => 'nullable|numeric|max:1000000',
             'quantity' => 'required|numeric|max:100000',
             'length' => 'required|numeric|max:10'
         ];

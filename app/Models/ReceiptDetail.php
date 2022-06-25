@@ -32,9 +32,8 @@ class ReceiptDetail extends Model
                     'product_id' => $val,
                 ], [
                     'quantity' => $request['quantity'][$key],
-                    'unit_price' => $product->price,
-                    'unit' => $product->inventory->unit,
-                    'price' => $product->price * $request['quantity'][$key]
+                    'unit_price' => $request['unit_price'][$key],
+                    'price' => $request['unit_price'][$key] * $request['quantity'][$key]
                 ]);
                 Inventory::updateQty($val, $request['quantity'][$key]);
                 $sale_model = new SalesPurchase();

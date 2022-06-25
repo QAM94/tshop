@@ -28,9 +28,9 @@ class StoreRecord extends FormRequest
             'sku' => 'required|unique:products,sku|max:99',
             'title' => 'required|unique:products,title|max:255',
             'description' => 'required|max:255',
-            'price' => 'required|numeric',
-            'quantity' => 'required|numeric',
-            'length' => 'required|numeric'
+            'price' => 'nullable|numeric|max:1000000',
+            'quantity' => 'required|numeric|max:1000000',
+            'length' => 'required||max:10|max:10'
         ];
     }
 }

@@ -29,15 +29,28 @@ class ProductsController extends Controller
         $this->dataAssign['data_table_columns'] = $this->primary_model->getColumnsForDataTable();
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $this->dataAssign['type'] = '';
+        $this->dataAssign['shop_id'] = '';
+        $this->dataAssign['shops'] = $this->shop_model->getRecords();
         return view($this->layout_base . '.' . $this->dataAssign['module'] . '.' . __FUNCTION__, $this->dataAssign);
     }
 
-    protected function ajaxListing()
+    public function showByShop(Request $request)
     {
-        $data = $this->primary_model->ajaxListing();
+        $this->dataAssign['shop_id'] = $request->shop_id;
+        $this->dataAssign['route_name_for_listing'] = [
+            'route' => $this->dataAssign['module'] . '.ajaxListing',
+            'key' => 'shop_id',
+            'value' => $request->shop_id
+        ];
+        $this->dataAssign['shops'] = $this->shop_model->getRecords();
+        return view($this->layout_base . '.' . $this->dataAssign['module'] . '.show', $this->dataAssign);
+    }
+
+    protected function ajaxListing(Request $request)
+    {
+        $data = $this->primary_model->ajaxListing($request);
         $module = $this->dataAssign['module'];
         return $this->makeDataTable($data, $this->actions, $module);
     }

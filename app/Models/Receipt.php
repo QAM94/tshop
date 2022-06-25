@@ -10,7 +10,7 @@ class Receipt extends Model
 {
     use SoftDeletes, EloquentJoin;
 
-    protected $fillable = ['uid', 'shop_id', 'customer_id', 'sub_total', 'discount', 'total', 'is_active'];
+    protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount', 'total', 'is_active'];
 
     protected $with = ['details'];
 
@@ -28,7 +28,7 @@ class Receipt extends Model
 
     public function getColumnsForDataTable()
     {
-        $data[] = ['data' => 'uid', 'name' => 'uid', 'title' => 'Receipt ID'];
+        $data[] = ['data' => 'receipt_no', 'name' => 'receipt_no', 'title' => 'Receipt No'];
         if(!isset(auth()->user()->store->id)) {
             $data[] = ['data' => 'shop.name', 'name' => 'shop.name', 'title' => 'Shop'];
         }
@@ -71,7 +71,6 @@ class Receipt extends Model
     public function updateRecord($request)
     {
         $record = $this->find($request->id);
-        $request->merge(['uid' => $record->customer_id . $record->id]);
         $record->update($request->only($this->getFillable()));
         return $record;
     }
@@ -91,7 +90,6 @@ class Receipt extends Model
 
     public function updateDetails($record) {
         $detail_model = new ReceiptDetail();
-        $record->uid = $record->customer_id . $record->id;
         $record->sub_total = $detail_model->getTotal($record->id);
         $record->total = $record->sub_total - $record->discount;
         $record->save();

@@ -16,6 +16,21 @@
                 </div>
                 <div class="row row-xs mt-2">
                     <div class="col-sm-12 col-lg-12">
+                        <div class="card card-body ">
+                            <label class="mb-1 d-block">Filter By Shop</label>
+                            <select name="shop_id" id="shop_filter" class="form-control sel2">
+                                <option value="0">All Shops</option>
+                                @foreach($shops as $shop)
+                                    <option value="{{ $shop->id }}" {{ $shop_id == $shop->id ? 'selected' : '' }}>
+                                        {{ $shop->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-xs mt-2">
+                    <div class="col-sm-12 col-lg-12">
                         <div class="card card-body dataTableBox">
                             @include('panel.includes.datatable')
                         </div>
@@ -27,4 +42,15 @@
         @include('panel.includes.modal_edit')
     </div>
 @endsection
-
+@push('custom-scripts')
+    <script>
+        $('#shop_filter').change(function () {
+            if($(this).val() == 0) {
+                window.location.replace(base_url + "/products");
+            }
+            else {
+                window.location.replace(base_url + "/products-shop/"+$(this).val());
+            }
+        });
+    </script>
+@endpush

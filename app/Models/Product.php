@@ -66,8 +66,11 @@ class Product extends Model
         ];
     }
 
-    public function ajaxListing()
+    public function ajaxListing($request)
     {
+        if (!empty($request->shop_id)) {
+            return $this->query()->with(['category','shop'])->where(['shop_id' => $request->shop_id]);
+        }
         return $this->query()->with(['category','shop']);
     }
 

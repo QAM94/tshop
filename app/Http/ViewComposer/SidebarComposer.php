@@ -28,6 +28,6 @@ class SidebarComposer
     {
         $view->with('modules', $this->getModuleList());
         $view->with('current_route_name', Route::currentRouteName());
-        $view->with('currency', '$');
+        $view->with('currency', 'SR');
     }
 }

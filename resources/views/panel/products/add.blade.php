@@ -2,7 +2,7 @@
       id="addForm">
     @csrf
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-8">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Shop</label>
                 <select name="shop_id" id="shop_id" class="form-control sel2">
@@ -40,32 +40,22 @@
                 <input type="text" name="title" id="title" class="form-control" placeholder="">
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Quantity</label>
                 <input type="text" name="quantity" id="quantity" class="form-control" placeholder="">
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Price</label>
                 <input type="text" name="price" id="price" class="form-control" placeholder="">
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Length</label>
                 <input type="text" name="length" id="length" class="form-control" placeholder="">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group mb-3">
-                <label class="mb-1 d-block">Unit</label>
-                <select name="unit" id="unit" class="form-control sel2">
-                    <option value="meter">Meter</option>
-                    <option value="guz">Guz</option>
-                    <option value="inch">Inch</option>
-                </select>
             </div>
         </div>
         <div class="col-sm-12">
@@ -79,26 +69,4 @@
         </div>
     </div>
 </form>
-
-<script type="text/javascript">
-
-    function readURL(input) {
-
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#store_logo').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $("#file-upload2").change(function () {
-        readURL(this);
-    });
-
-</script>
 
