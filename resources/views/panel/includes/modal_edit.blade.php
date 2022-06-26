@@ -24,6 +24,9 @@
         }).done(function (data) {
             $('#edit-{{ $module }}').html(data);
             $('#editModal').modal('show');
+            if($('.sel2').length > 0){
+                $('.sel2').select2();
+            }
         }).fail(function (err) {
             console.log(err);
         });
