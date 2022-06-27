@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\MoveStock;
 use App\Http\Requests\Product\StoreRecord;
 use App\Http\Requests\Product\UpdateRecord;
 use App\Models\Category;
@@ -24,6 +25,7 @@ class ProductsController extends Controller
         $this->shop_model = new Shop();
         $this->dataAssign['module'] = 'products';
         $this->actions = ['edit'];
+        $this->show_check_in_list[] = ['column_name' => 'id', 'column_data' => 'id'];
         $this->show_status_in_list[] = ['column_name' => 'is_active' , 'column_data' => 'is_active'];
         $this->dataAssign['route_name_for_listing'] = $this->dataAssign['module'] . '.ajaxListing';
         $this->dataAssign['data_table_columns'] = $this->primary_model->getColumnsForDataTable();
@@ -96,5 +98,10 @@ class ProductsController extends Controller
     public function getByShop(Request $request)
     {
         return $this->primary_model->getRecords($request->shop_id);
+    }
+
+    public function moveStock(MoveStock $moveStock)
+    {
+        return $this->primary_model->moveStock($moveStock);
     }
 }

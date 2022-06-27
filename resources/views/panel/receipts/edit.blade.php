@@ -85,26 +85,35 @@
                 <div class="col-sm-2">
                     <div class="form-group mb-3">
                         <label class="mb-1 d-block">Price</label>
-                        <input type="number" class="form-control proPrice" readonly
+                        <input type="number" class="form-control proPrice" name="price[]"
                                value="{{ $row->price }}">
                     </div>
                 </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" name="description[]"
+                               value="{{ $row->description }}" placeholder="Enter Extra Details Here...">
+                    </div>
+                </div>
+                <hr>
             </div>
         @endforeach
     </div>
     <div class="row">
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
         <p class="col-sm-2">
-            <input type="number" class="form-control" id="sub_total" disabled value="{{ $data->sub_total }}">
+            <input type="number" class="form-control" id="sub_total" name="sub_total"
+                   value="{{ $data->sub_total }}">
         </p>
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
         <p class="col-sm-2">
             <input type="number" class="form-control" name="discount" id="discount" min="0"
-                   max="{{ $data->sub_total }}" value="{{ $data->discount ? $data->discount : 0 }}" step="any">
+                   value="{{ $data->discount ? $data->discount : 0 }}" step="any">
         </p>
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
         <p class="col-sm-2">
-            <input type="number" class="form-control" id="total" disabled value="{{ $data->total }}">
+            <input type="number" class="form-control" id="total" name="total"
+                   value="{{ $data->total }}">
         </p>
         <div class="col-sm-6 d-flex align-items-center">
             <div class="custom-control custom-switch pl-0">

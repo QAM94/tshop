@@ -63,7 +63,7 @@ class ReceiptsController extends Controller
         $record = $this->primary_model->createRecord($storeRecord);
         $storeRecord->merge(['id' => $record->id]);
         $this->detail_model->updateRecord($storeRecord);
-        $this->primary_model->updateDetails($record);
+       // $this->primary_model->updateDetails($record);
         return $record;
     }
 
@@ -80,7 +80,7 @@ class ReceiptsController extends Controller
     {
         $record = $this->primary_model->updateRecord($updateRecord);
         $this->detail_model->updateRecord($updateRecord);
-        $this->primary_model->updateDetails($record);
+//        $this->primary_model->updateDetails($record);
         return $record;
     }
 

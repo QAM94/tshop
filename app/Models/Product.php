@@ -40,7 +40,7 @@ class Product extends Model
 
     public function getColumnsForDataTable()
     {
-        $data = [];
+        $data = [['data' => 'id', 'name' => 'id', 'title' => '']];
         if(!isset(auth()->user()->store->id)) {
             $data[] = ['data' => 'shop.name', 'name' => 'shop.name', 'title' => 'Shop'];
         }
@@ -113,5 +113,9 @@ class Product extends Model
             });
         }
         return $query->get();
+    }
+
+    public function moveStock($request) {
+        return $this->whereIn('id', $request->check_ids)->update(['shop_id' => $request->shop_id]);
     }
 }

@@ -21,7 +21,7 @@ class Controller extends BaseController
     protected $layout_base = 'panel';
 
     protected $actions_view = 'includes.datatable_buttons';
-    protected $checks_view = 'includes.datatable_check';
+    protected $check_view = 'includes.datatable_check';
     protected $toggle_view = 'includes.datatable_toggle';
     protected $image_view = 'includes.datatable_image';
     protected $status_view = 'includes.datatable_status';
@@ -31,6 +31,7 @@ class Controller extends BaseController
     protected $show_status_in_list = [];
     protected $show_toggle_in_list = [];
     protected $show_url_in_list = [];
+    protected $show_check_in_list = [];
     protected $hasManualSearch = [];
     protected $hasRawCodeColumn = ['price','created_at'];
     protected $currency = 'SR';
@@ -42,7 +43,7 @@ class Controller extends BaseController
     final function getElementViews()
     {
         //return ['image', 'toggle', 'url', 'dropdown', 'comment'];
-        return ['status','image', 'url'];
+        return ['status','image', 'url', 'check'];
     }
 
     final function makeDataTable($data, $actions, $module)

@@ -32,7 +32,25 @@
                 <div class="row row-xs mt-2">
                     <div class="col-sm-12 col-lg-12">
                         <div class="card card-body dataTableBox">
-                            @include('panel.includes.datatable')
+                            <form method="POST" action="{{ route($module.'.move-stock') }}" id="stockForm">
+                                @csrf
+                                <div class="row form-group">
+                                    <div class="col-md-8">
+                                        <select name="shop_id" id="shop_id" class="form-control sel2 col-sm-8">
+                                            <option>Please Select Shop to Move Stock</option>
+                                            @foreach($shops as $shop)
+                                                <option value="{{ $shop->id }}">
+                                                    {{ $shop->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-sm btn-success tx-12" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                                @include('panel.includes.datatable')
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -45,12 +63,43 @@
 @push('custom-scripts')
     <script>
         $('#shop_filter').change(function () {
-            if($(this).val() == 0) {
+            if ($(this).val() == 0) {
                 window.location.replace(base_url + "/products");
+            } else {
+                window.location.replace(base_url + "/products-shop/" + $(this).val());
             }
-            else {
-                window.location.replace(base_url + "/products-shop/"+$(this).val());
-            }
+        });
+        $(document).on('submit', '#stockForm', function (event) {
+            event.preventDefault();
+            removeAjaxMsgs();
+            let form = $(this);
+            let btn = form.find('.btn');
+            btn.attr("disabled", true);
+            btn.addClass('loader');
+            var formData = new FormData(this);
+
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    var table = $('#datatable-' + _module).DataTable();
+                    table.ajax.reload();
+                    btn.attr("disabled", false);
+                    Swal.fire(
+                        'Success!',
+                        'Stock Updated Successfully!',
+                        'success'
+                    )
+                }, error: function (err) {
+                    btn.attr("disabled", false);
+                    btn.removeClass('loader');
+                    showErrorMsgs(err);
+                }
+            });
         });
     </script>
 @endpush

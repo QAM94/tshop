@@ -28,7 +28,13 @@
     <div class="col-sm-2">
         <div class="form-group mb-3">
             <label class="mb-1 d-block">Price</label>
-            <input type="number" class="form-control proPrice" readonly>
+            <input type="number" class="form-control proPrice" name="price[]">
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="form-group mb-3">
+            <input type="text" class="form-control" name="description[]" placeholder="Enter Extra Details Here...">
         </div>
     </div>
 </div>
+<hr>

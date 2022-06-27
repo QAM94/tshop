@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 class ReceiptDetail extends Model
 {
 
-    protected $fillable = ['receipt_id', 'product_id', 'quantity', 'price', 'unit'];
+    protected $fillable = ['receipt_id', 'product_id', 'quantity', 'price', 'unit', 'description'];
 
     public $timestamps = FALSE;
 
@@ -24,6 +24,9 @@ class ReceiptDetail extends Model
     public function updateRecord($request)
     {
         $product_model = new Product();
+        if(empty($request['product_id'])) {
+            return false;
+        }
         foreach($request['product_id'] as $key => $val) {
             $product = $product_model->findRecord($val);
             if($val > 0) {
@@ -33,7 +36,8 @@ class ReceiptDetail extends Model
                 ], [
                     'quantity' => $request['quantity'][$key],
                     'unit_price' => $request['unit_price'][$key],
-                    'price' => $request['unit_price'][$key] * $request['quantity'][$key]
+                    'price' => $request['price'][$key],
+                    'description' => $request['description'][$key]
                 ]);
                 Inventory::updateQty($val, $request['quantity'][$key]);
                 $sale_model = new SalesPurchase();

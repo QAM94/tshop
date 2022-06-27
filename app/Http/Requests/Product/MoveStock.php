@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Receipt;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRecord extends FormRequest
+class MoveStock extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class UpdateRecord extends FormRequest
     public function rules()
     {
         return [
-            'shop_id' => 'required|exists:shops,id,deleted_at,NULL',
-            'customer_id' => 'required'
+            'shop_id' => 'required|exists:shops,id',
+            'check_ids' => 'required|array'
         ];
     }
 }

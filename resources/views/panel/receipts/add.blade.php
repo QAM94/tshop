@@ -48,7 +48,7 @@
     <div class="row">
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
         <p class="col-sm-2">
-            <input type="number" class="form-control" id="sub_total" disabled>
+            <input type="number" class="form-control" name="sub_total" id="sub_total">
         </p>
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
         <p class="col-sm-2">
@@ -56,7 +56,7 @@
         </p>
         <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
         <p class="col-sm-2">
-            <input type="number" class="form-control" id="total" disabled>
+            <input type="number" class="form-control" name="total" id="total">
         </p>
         <div class="col-sm-12 text-right">
             <button class="btn btn-success" type="submit">Submit</button>

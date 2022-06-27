@@ -53,6 +53,18 @@ $(document).on('keyup keypress change', '.proUPrice', function () {
     calculateBill($(this));
 });
 
+$(document).on('keyup keypress change', '#sub_total', function () {
+    let sub_total = $("#sub_total").val();
+    let discount = $("#discount").val();
+    $("#total").val(sub_total - discount);
+});
+
+$(document).on('keyup keypress change', '#discount', function () {
+    let sub_total = $("#sub_total").val();
+    let discount = $("#discount").val();
+    $("#total").val(sub_total - discount);
+});
+
 function calculateBill(selector) {
     let unitPrice = selector.parent().parent().parent().find('.proUPrice').val();
     let qty = selector.parent().parent().parent().find('.proQty').val();
@@ -65,6 +77,7 @@ function calculateBill(selector) {
     let discount = $("#discount").val();
     $("#total").val(sum - discount);
 }
+
 $(document).on('keyup keypress change', '#discount', function () {
     let sub_total = $("#sub_total").val();
     let discount = $("#discount").val();

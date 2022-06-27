@@ -24,7 +24,8 @@ class StoreRecord extends FormRequest
     public function rules()
     {
         return [
-            'shop_id' => 'nullable|exists:shops,id,deleted_at,NULL'
+            'shop_id' => 'required|exists:shops,id,deleted_at,NULL',
+            'customer_id' => 'required'
         ];
     }
 }

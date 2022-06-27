@@ -130,6 +130,12 @@ Route::group(['middleware' => ['auth', 'role', 'logout']], function () {
                     'url' => 'shop/{shop_id}',
                     'http_method' => 'get'
                 ],
+                [
+                    'route_name' => 'move-stock',
+                    'method' => 'moveStock',
+                    'url' => 'move-stock',
+                    'http_method' => 'post'
+                ],
             ]
         ],
         ['module_name' => 'receipts', 'controller_name' => 'Receipts',
