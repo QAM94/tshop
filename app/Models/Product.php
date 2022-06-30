@@ -49,6 +49,7 @@ class Product extends Model
             ['data' => 'sku', 'name' => 'sku', 'title' => 'SKU'],
             ['data' => 'title', 'name' => 'title', 'title' => 'Name'],
             ['data' => 'inventory.quantity', 'name' => 'inventory.quantity', 'title' => 'Quantity'],
+            ['data' => 'inventory.length', 'name' => 'inventory.length', 'title' => 'Yards'],
             ['data' => 'price', 'name' => 'price', 'title' => 'Price'],
             ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?', 'searchable' => 'false', 'nosort' => 'true'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
@@ -97,6 +98,8 @@ class Product extends Model
     {
         $data = $this->findOrFail($id);
         $data->delete();
+        Inventory::where(['product_id' => $id])->delete();
+        CategoryProduct::where(['product_id' => $id])->delete();
 
         return $id;
     }
@@ -116,6 +119,26 @@ class Product extends Model
     }
 
     public function moveStock($request) {
-        return $this->whereIn('id', $request->check_ids)->update(['shop_id' => $request->shop_id]);
+        $stocks = $this->with(['category'])->whereIn('id', $request->check_ids)->get();
+        foreach ($stocks as $stock) {
+            $stock->inventory->length = $stock->inventory->length - $request->length;
+            $stock->inventory->quantity = $stock->inventory->quantity - $request->quantity;
+            $stock->save();
+
+            $product = $this->create(['shop_id' => $request->shop_id,
+                'title' => $stock->title,
+                'description' => $stock->description,
+                'price' => $stock->price]);
+            $catPro = new CategoryProduct();
+            $catPro->product_id = $product->id;
+            $catPro->category_id = $stock->category->id;
+            $catPro->save();
+
+            $inventory = new Inventory();
+            $inventory->product_id = $product->id;
+            $inventory->quantity = $request->quantity;
+            $inventory->length = $request->length;
+            $inventory->save();
+        }
     }
 }

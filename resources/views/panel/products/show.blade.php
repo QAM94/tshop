@@ -35,7 +35,7 @@
                             <form method="POST" action="{{ route($module.'.move-stock') }}" id="stockForm">
                                 @csrf
                                 <div class="row form-group">
-                                    <div class="col-md-8">
+                                    <div class="col-sm-6">
                                         <select name="shop_id" id="shop_id" class="form-control sel2 col-sm-8">
                                             <option>Please Select Shop to Move Stock</option>
                                             @foreach($shops as $shop)
@@ -45,7 +45,15 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-sm-2">
+                                        <input type="text" name="quantity" id="quantity" class="form-control"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-sm-2">
+                                            <input type="text" name="length" id="length" class="form-control"
+                                                   placeholder="Yards">
+                                    </div>
+                                    <div class="col-sm-1">
                                         <button class="btn btn-sm btn-success tx-12" type="submit">Submit</button>
                                     </div>
                                 </div>

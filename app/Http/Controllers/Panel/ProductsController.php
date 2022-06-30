@@ -24,7 +24,7 @@ class ProductsController extends Controller
         $this->inventory_model = new Inventory();
         $this->shop_model = new Shop();
         $this->dataAssign['module'] = 'products';
-        $this->actions = ['edit'];
+        $this->actions = ['edit','delete'];
         $this->show_check_in_list[] = ['column_name' => 'id', 'column_data' => 'id'];
         $this->show_status_in_list[] = ['column_name' => 'is_active' , 'column_data' => 'is_active'];
         $this->dataAssign['route_name_for_listing'] = $this->dataAssign['module'] . '.ajaxListing';
@@ -93,6 +93,11 @@ class ProductsController extends Controller
         $this->category_product_model->updateRecord($updateRecord);
         $this->inventory_model->updateRecord($updateRecord);
         return $product;
+    }
+
+    public function delete($id)
+    {
+        return $this->primary_model->deleteRecord($id);
     }
 
     public function getByShop(Request $request)

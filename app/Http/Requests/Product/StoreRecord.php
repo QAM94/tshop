@@ -25,9 +25,9 @@ class StoreRecord extends FormRequest
     {
         return [
             'shop_id' => 'required|exists:shops,id',
-            'sku' => 'required|unique:products,sku|max:99',
-            'title' => 'required|unique:products,title|max:255',
-            'description' => 'required|max:255',
+            'sku' => 'nullable|max:99',
+            'title' => 'required|max:255',
+            'description' => 'nullable|max:255',
             'price' => 'nullable|numeric|max:1000000',
             'quantity' => 'required|numeric|max:1000000',
             'length' => 'required||max:10|max:10'

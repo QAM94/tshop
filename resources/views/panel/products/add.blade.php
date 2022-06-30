@@ -54,7 +54,7 @@
         </div>
         <div class="col-sm-4">
             <div class="form-group mb-3">
-                <label class="mb-1 d-block">Length</label>
+                <label class="mb-1 d-block">Yards</label>
                 <input type="text" name="length" id="length" class="form-control" placeholder="">
             </div>
         </div>
