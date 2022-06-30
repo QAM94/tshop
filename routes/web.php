@@ -23,11 +23,9 @@ Route::group(['middleware' => 'guest'], function () {
 
 });
 
-Route::get('/email-temp', config('filesystems.PANEL_CONTROLLER_PATH') . 'CurrentRecallController@sendRecallEmail')->name('send-recall');
+Route::get('receipt-details-delete/{id}', config('filesystems.PANEL_CONTROLLER_PATH') .
+    'ReceiptsController@deleteDetail')->name('receipt-details.delete');
 
-Route::get('/email-temp-html', function () {
-    return view('emails.recall_temp');
-})->name('email-temp');
 
 Route::group(['middleware' => ['auth', 'role', 'logout']], function () {
 
@@ -40,6 +38,7 @@ Route::group(['middleware' => ['auth', 'role', 'logout']], function () {
     Route::post('update-profile/{id}', config('filesystems.PANEL_CONTROLLER_PATH') . 'UsersController@updateProfile')->name('user.profile_update');
 
     Route::get('search', config('filesystems.PANEL_CONTROLLER_PATH') . 'GlobalSearchController@index')->name('search');
+
 
     $crud_modules = [
 
@@ -70,7 +69,7 @@ Route::group(['middleware' => ['auth', 'role', 'logout']], function () {
 
         ['module_name' => 'roles', 'controller_name' => 'Roles'],
 
-        ['module_name' => 'users', 'controller_name' => 'Users' ,
+        ['module_name' => 'users', 'controller_name' => 'Users',
 
             'additional_routes' => [
 

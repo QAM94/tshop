@@ -90,4 +90,14 @@ class ReceiptsController extends Controller
         return view($this->layout_base . '.' . $this->dataAssign['module'] . '.row', $this->dataAssign);
     }
 
+    public function delete($id)
+    {
+        return $this->primary_model->deleteRecord($id);
+    }
+
+    public function deleteDetail($id)
+    {
+        return $this->detail_model->deleteRecord($id);
+    }
+
 }

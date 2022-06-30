@@ -54,10 +54,10 @@
     <div id="detailsDiv">
         @foreach($data->details as $row)
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <div class="form-group mb-3">
                         <label class="mb-1 d-block">Product</label>
-                        <select name="product_id[]" class="form-control proSel">
+                        <select class="form-control proSel" disabled>
                             <option>Please Select</option>
                             @foreach($products as $product)
                                 <option {{ $row->product_id == $product->id ? 'selected' : '' }}
@@ -68,27 +68,20 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="form-group mb-3">
-                        <label class="mb-1 d-block">Unit Price</label>
-                        <input type="number" name="unit_price[]" class="form-control proUPrice" min="1"
-                               value="{{ $row->unit_price }}" step="any">
+                        <label class="mb-1 d-block">Yards</label>
+                        <input type="number" class="form-control proQty"
+                               value="{{ $row->quantity }}" min="1" step="any" disabled>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group mb-3">
-                        <label class="mb-1 d-block">Quantity</label>
-                        <input type="number" name="quantity[]" class="form-control proQty"
-                               value="{{ $row->quantity }}" min="1" step="any">
-                    </div>
+                <div class="col-sm-1">
+                    <a href="javascript:;" class="removeRow" data-id="{{ $row->id }}">
+                        <i class="ion-md-close"></i>
+                    </a>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group mb-3">
-                        <label class="mb-1 d-block">Price</label>
-                        <input type="number" class="form-control proPrice" name="price[]"
-                               value="{{ $row->price }}">
-                    </div>
-                </div>
+                <input type="hidden" name="unit_price[]" class="proUPrice" value="{{ $row->unit_price }}" />
+                <input type="hidden" class="proPrice" name="price[]" value="{{ $row->price }}" />
                 <div class="col-sm-12">
                     <div class="form-group mb-3">
                         <input type="text" class="form-control" name="description[]"
@@ -114,6 +107,16 @@
         <p class="col-sm-2">
             <input type="number" class="form-control" id="total" name="total"
                    value="{{ $data->total }}">
+        </p>
+        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
+        <p class="col-sm-2">
+            <input type="number" class="form-control" id="advance_payment" name="advance_payment"
+                   value="{{ $data->advance_payment }}">
+        </p>
+        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
+        <p class="col-sm-2">
+            <input type="number" class="form-control" id="remaining_payment" name="remaining_payment"
+                   value="{{ $data->remaining_payment }}">
         </p>
         <div class="col-sm-6 d-flex align-items-center">
             <div class="custom-control custom-switch pl-0">

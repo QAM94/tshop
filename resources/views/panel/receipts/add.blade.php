@@ -58,6 +58,14 @@
         <p class="col-sm-2">
             <input type="number" class="form-control" name="total" id="total">
         </p>
+        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
+        <p class="col-sm-2">
+            <input type="number" class="form-control" id="advance_payment" name="advance_payment" />
+        </p>
+        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
+        <p class="col-sm-2">
+            <input type="number" class="form-control" id="remaining_payment" name="remaining_payment" />
+        </p>
         <div class="col-sm-12 text-right">
             <button class="btn btn-success" type="submit">Submit</button>
         </div>

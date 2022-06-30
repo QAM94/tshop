@@ -10,7 +10,8 @@ class Receipt extends Model
 {
     use SoftDeletes, EloquentJoin;
 
-    protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount', 'total', 'is_active'];
+    protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount',
+        'total', 'advance_payment', 'remaining_payment', 'is_active'];
 
     protected $with = ['details'];
 

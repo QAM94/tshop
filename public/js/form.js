@@ -54,15 +54,15 @@ $(document).on('keyup keypress change', '.proUPrice', function () {
 });
 
 $(document).on('keyup keypress change', '#sub_total', function () {
-    let sub_total = $("#sub_total").val();
-    let discount = $("#discount").val();
-    $("#total").val(sub_total - discount);
+    calculateTotal();
 });
 
 $(document).on('keyup keypress change', '#discount', function () {
-    let sub_total = $("#sub_total").val();
-    let discount = $("#discount").val();
-    $("#total").val(sub_total - discount);
+    calculateTotal();
+});
+
+$(document).on('keyup keypress change', '#advance_payment', function () {
+    calculateTotal();
 });
 
 function calculateBill(selector) {
@@ -74,12 +74,23 @@ function calculateBill(selector) {
         sum += +$(this).val();
     });
     $("#sub_total").val(sum);
-    let discount = $("#discount").val();
-    $("#total").val(sum - discount);
+    calculateTotal();
+
 }
 
-$(document).on('keyup keypress change', '#discount', function () {
+function calculateTotal() {
     let sub_total = $("#sub_total").val();
     let discount = $("#discount").val();
-    $("#total").val(sub_total - discount);
+    let total = sub_total - discount;
+    $("#total").val(total);
+    let advance = $("#advance_payment").val();
+    $("#remaining_payment").val(total - advance);
+}
+
+$(document).on("click", ".removeRow", function() {
+    let id = $(this).data('id');
+    if(id > 0) {
+        deleteRow(id, 'receipt-details');
+    }
+    $(this).closest('.row').remove();
 });
