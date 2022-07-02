@@ -15,8 +15,8 @@
     <div class="col-sm-3">
         <div class="form-group mb-3">
             <label class="mb-1 d-block">Yards</label>
-            <input type="number" name="quantity[]" class="form-control proQty" min="1"
-                   step="any" value="2.5">
+            <input type="number" name="yards[]" class="form-control proQty" min="1"
+                   step="any" value="0">
         </div>
     </div>
     <div class="col-sm-1">
@@ -26,10 +26,4 @@
     </div>
     <input type="hidden" name="unit_price[]" class="form-control proUPrice" min="1" value="0" />
     <input type="hidden" class="form-control proPrice" name="price[]" value="0" />
-    <div class="col-sm-12">
-        <div class="form-group mb-3">
-            <input type="text" class="form-control" name="description[]" placeholder="Enter Extra Details Here...">
-        </div>
-    </div>
-    <hr>
 </div>

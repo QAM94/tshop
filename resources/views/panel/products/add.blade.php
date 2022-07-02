@@ -31,31 +31,37 @@
         <div class="col-sm-6">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">SKU</label>
-                <input type="text" name="sku" id="sku" class="form-control" placeholder="">
+                <input type="text" name="sku" id="sku" class="form-control" />
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="">
+                <input type="text" name="title" id="title" class="form-control" />
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group mb-3">
-                <label class="mb-1 d-block">Quantity</label>
-                <input type="text" name="quantity" id="quantity" class="form-control" placeholder="">
+                <label class="mb-1 d-block">Quantity (Units)</label>
+                <input type="number" name="quantity" id="quantity" class="form-control ydsUnit" />
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group mb-3">
-                <label class="mb-1 d-block">Price</label>
-                <input type="text" name="price" id="price" class="form-control" placeholder="">
+                <label class="mb-1 d-block">Yards Per Unit</label>
+                <input type="number" name="length" id="length" class="form-control ydsUnit" step="any"  />
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Yards</label>
-                <input type="text" name="length" id="length" class="form-control" placeholder="">
+                <input type="number" name="yards" id="yards" class="form-control" step="any" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">Price</label>
+                <input type="number" name="price" id="price" class="form-control" step="any" />
             </div>
         </div>
         <div class="col-sm-12">

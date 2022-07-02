@@ -7,6 +7,11 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreRecord extends FormRequest
 {
     /**
+     * @var mixed
+     */
+    public $customer_id;
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool

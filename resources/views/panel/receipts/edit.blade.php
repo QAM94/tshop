@@ -7,7 +7,7 @@
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Receipt No</label>
                 <input type="text" name="receipt_no" id="receipt_no" class="form-control"
-                       value="{{ $data->receipt_no }}" />
+                       value="{{ $data->receipt_no }}"/>
             </div>
         </div>
         <div class="col-sm-6">
@@ -45,12 +45,8 @@
                 <i class="ion-ios-add-circle-outline"></i> Add Product
             </button>
             <br/>
-            <!-- <button type="button" class="btn btn-danger delRow" style="padding: 3px 5px;">
-                                <i class="ion-ios-close-circle-outline"></i>
-                            </button>-->
         </div>
     </div>
-
     <div id="detailsDiv">
         @foreach($data->details as $row)
             <div class="row">
@@ -72,7 +68,7 @@
                     <div class="form-group mb-3">
                         <label class="mb-1 d-block">Yards</label>
                         <input type="number" class="form-control proQty"
-                               value="{{ $row->quantity }}" min="1" step="any" disabled>
+                               value="{{ $row->yards }}" min="1" step="any" disabled>
                     </div>
                 </div>
                 <div class="col-sm-1">
@@ -80,44 +76,45 @@
                         <i class="ion-md-close"></i>
                     </a>
                 </div>
-                <input type="hidden" name="unit_price[]" class="proUPrice" value="{{ $row->unit_price }}" />
-                <input type="hidden" class="proPrice" name="price[]" value="{{ $row->price }}" />
-                <div class="col-sm-12">
-                    <div class="form-group mb-3">
-                        <input type="text" class="form-control" name="description[]"
-                               value="{{ $row->description }}" placeholder="Enter Extra Details Here...">
-                    </div>
-                </div>
-                <hr>
+                <input type="hidden" name="unit_price[]" class="proUPrice" value="{{ $row->unit_price }}"/>
+                <input type="hidden" class="proPrice" name="price[]" value="{{ $row->price }}"/>
             </div>
         @endforeach
     </div>
+    <hr/>
     <div class="row">
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" id="sub_total" name="sub_total"
-                   value="{{ $data->sub_total }}">
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" name="discount" id="discount" min="0"
-                   value="{{ $data->discount ? $data->discount : 0 }}" step="any">
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" id="total" name="total"
-                   value="{{ $data->total }}">
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" id="advance_payment" name="advance_payment"
-                   value="{{ $data->advance_payment }}">
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" id="remaining_payment" name="remaining_payment"
-                   value="{{ $data->remaining_payment }}">
-        </p>
+        <div class="col-sm-6">
+            <label class="mb-1 d-block" style="font-weight: bold;">Extra Details</label>
+            <textarea class="form-control" name="description" rows="5"
+                      placeholder="Enter Extra Details Here...">{{ $data->description }}</textarea>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
+                <input type="number" class="form-control col-sm-3" id="sub_total" name="sub_total"
+                       value="{{ $data->sub_total }}">
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
+                <input type="number" class="form-control col-sm-3" name="discount" id="discount" min="0"
+                       value="{{ $data->discount ? $data->discount : 0 }}" step="any">
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
+                <input type="number" class="form-control col-sm-3" id="total" name="total"
+                       value="{{ $data->total }}">
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
+                <input type="number" class="form-control col-sm-3" id="advance_payment" name="advance_payment"
+                       value="{{ $data->advance_payment }}">
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
+                <input type="number" class="form-control col-sm-3" id="remaining_payment" name="remaining_payment"
+                       value="{{ $data->remaining_payment }}">
+            </div>
+        </div>
         <div class="col-sm-6 d-flex align-items-center">
             <div class="custom-control custom-switch pl-0">
                 <label for="customSwitch2" class="switch-active">Status</label>

@@ -11,11 +11,13 @@ class SalesPurchase extends Model
 
     protected $fillable = ['shop_id', 'product_id', 'type', 'quantity', 'price', 'is_active'];
 
-    public function shop() {
+    public function shop()
+    {
         return $this->belongsTo(Shop::class, 'shop_id');
     }
 
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
@@ -44,18 +46,18 @@ class SalesPurchase extends Model
 
     public function ajaxListing()
     {
-        return $this->query()->with(['shop','product']);
+        return $this->query()->with(['shop', 'product']);
     }
 
     public function findRecord($id)
     {
-        return $this->with(['shop','product'])->find($id);
+        return $this->with(['shop', 'product'])->find($id);
     }
 
     public function createRecord($request)
     {
         $record = $this->create($request->only($this->getFillable()));
-        Inventory::updateQty($request->product_id, $request->quantity, $request->type);
+        Inventory::updateStock($request->product_id, $request->quantity, $request->type);
         return $record;
     }
 
@@ -79,7 +81,8 @@ class SalesPurchase extends Model
         return $this->where('is_active', 1)->get();
     }
 
-    public function createSale($product, $quantity) {
+    public function createSale($product, $quantity)
+    {
         return $this->create([
             'shop_id' => $product->shop_id,
             'product_id' => $product->id,

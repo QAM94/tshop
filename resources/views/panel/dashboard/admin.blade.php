@@ -14,7 +14,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Product Name</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-6">

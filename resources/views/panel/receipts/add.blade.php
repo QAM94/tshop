@@ -39,33 +39,39 @@
                     <i class="ion-ios-add-circle-outline"></i> Add Product
                 </button>
                 <br/>
-                <!-- <button type="button" class="btn btn-danger delRow" style="padding: 3px 5px;">
-                                    <i class="ion-ios-close-circle-outline"></i>
-                                </button>-->
             </div>
         </div>
     </div>
+    <hr/>
     <div class="row">
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" name="sub_total" id="sub_total">
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" name="discount" id="discount" min="0" step="any">
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" name="total" id="total">
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" id="advance_payment" name="advance_payment" />
-        </p>
-        <p class="col-sm-10" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
-        <p class="col-sm-2">
-            <input type="number" class="form-control" id="remaining_payment" name="remaining_payment" />
-        </p>
+        <div class="col-sm-6">
+            <label class="mb-1 d-block" style="font-weight: bold;">Extra Details</label>
+            <textarea class="form-control" name="description" rows="5"
+                      placeholder="Enter Extra Details Here..."></textarea>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
+                <input type="number" class="form-control col-sm-3" id="sub_total" name="sub_total" />
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
+                <input type="number" class="form-control col-sm-3" name="discount" id="discount" min="0"
+                       step="any" />
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
+                <input type="number" class="form-control col-sm-3" id="total" name="total" />
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
+                <input type="number" class="form-control col-sm-3" id="advance_payment" name="advance_payment" />
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
+                <input type="number" class="form-control col-sm-3" id="remaining_payment" name="remaining_payment" >
+            </div>
+        </div>
         <div class="col-sm-12 text-right">
             <button class="btn btn-success" type="submit">Submit</button>
         </div>

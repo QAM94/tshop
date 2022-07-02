@@ -29,7 +29,8 @@ class Product extends Model
         return $this->hasOne(Inventory::class, 'product_id');
     }
 
-    public function shop() {
+    public function shop()
+    {
         return $this->belongsTo(Shop::class, 'shop_id');
     }
 
@@ -41,7 +42,7 @@ class Product extends Model
     public function getColumnsForDataTable()
     {
         $data = [['data' => 'id', 'name' => 'id', 'title' => '']];
-        if(!isset(auth()->user()->store->id)) {
+        if (!isset(auth()->user()->store->id)) {
             $data[] = ['data' => 'shop.name', 'name' => 'shop.name', 'title' => 'Shop'];
         }
         array_push($data,
@@ -49,7 +50,7 @@ class Product extends Model
             ['data' => 'sku', 'name' => 'sku', 'title' => 'SKU'],
             ['data' => 'title', 'name' => 'title', 'title' => 'Name'],
             ['data' => 'inventory.quantity', 'name' => 'inventory.quantity', 'title' => 'Quantity'],
-            ['data' => 'inventory.length', 'name' => 'inventory.length', 'title' => 'Yards'],
+            ['data' => 'inventory.yards', 'name' => 'inventory.yards', 'title' => 'Yards'],
             ['data' => 'price', 'name' => 'price', 'title' => 'Price'],
             ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?', 'searchable' => 'false', 'nosort' => 'true'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
@@ -70,9 +71,9 @@ class Product extends Model
     public function ajaxListing($request)
     {
         if (!empty($request->shop_id)) {
-            return $this->query()->with(['category','shop'])->where(['shop_id' => $request->shop_id]);
+            return $this->query()->with(['category', 'shop'])->where(['shop_id' => $request->shop_id]);
         }
-        return $this->query()->with(['category','shop']);
+        return $this->query()->with(['category', 'shop']);
     }
 
     public function findRecord($id)
@@ -111,34 +112,44 @@ class Product extends Model
             $query->where('shop_id', $shop_id);
         }
         if ($in_stock) {
-            $query->whereHas('inventory', function ($q){
+            $query->whereHas('inventory', function ($q) {
                 $q->where('quantity', '>', 0);
             });
         }
         return $query->get();
     }
 
-    public function moveStock($request) {
+    public function moveStock($request)
+    {
         $stocks = $this->with(['category'])->whereIn('id', $request->check_ids)->get();
         foreach ($stocks as $stock) {
-            $stock->inventory->length = $stock->inventory->length - $request->length;
-            $stock->inventory->quantity = $stock->inventory->quantity - $request->quantity;
-            $stock->save();
+            $stock->inventory->yards = $stock->inventory->yards - $request->yards;
+            $stock->inventory->quantity = ceil($stock->inventory->yards / $stock->inventory->length);
+            $stock->inventory->save();
 
-            $product = $this->create(['shop_id' => $request->shop_id,
+            $product = $this->updateOrCreate([
+                'title' => $stock->title,
+                'shop_id' => $request->shop_id,
+            ], ['shop_id' => $request->shop_id,
                 'title' => $stock->title,
                 'description' => $stock->description,
                 'price' => $stock->price]);
+
             $catPro = new CategoryProduct();
-            $catPro->product_id = $product->id;
-            $catPro->category_id = $stock->category->id;
-            $catPro->save();
+            $catPro->firstOrCreate([
+                'product_id' => $product->id,
+                'category_id' => $stock->category->id
+            ], ['product_id' => $product->id,
+                'category_id' => $stock->category->id]);
 
             $inventory = new Inventory();
-            $inventory->product_id = $product->id;
-            $inventory->quantity = $request->quantity;
-            $inventory->length = $request->length;
-            $inventory->save();
+            $inventory->updateOrCreate([
+                'product_id' => $product->id,
+            ], [
+                'length' => $stock->inventory->length,
+                'yards' => $request->yards,
+                'quantity' => ceil($request->yards / $stock->inventory->length)
+            ]);
         }
     }
 }

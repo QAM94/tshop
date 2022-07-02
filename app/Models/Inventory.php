@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 class Inventory extends Model
 {
 
-    protected $fillable = ['product_id', 'quantity', 'length', 'unit'];
+    protected $fillable = ['product_id', 'quantity', 'length', 'yards', 'unit'];
 
     public $timestamps = FALSE;
 
@@ -20,6 +20,7 @@ class Inventory extends Model
         ], [
             'quantity' => $request->quantity,
             'length' => $request->length,
+            'yards' => $request->length * $request->quantity,
             'unit' => $request->unit,
         ]);
     }
@@ -29,9 +30,11 @@ class Inventory extends Model
         return $this->where(['product_id' => $product_id])->first();
     }
 
-    public static function updateQty($product_id, $qty, $type='sale') {
+    public static function updateStock($product_id, $yards, $type = 'sale')
+    {
         $rec = self::where(['product_id' => $product_id])->first();
-        $rec->quantity = $type == 'sale' ? $rec->quantity - $qty : $rec->quantity + $qty;
+        $rec->yards = $type == 'sale' ? $rec->yards - $yards : $rec->yards + $yards;
+        $rec->quantity = ceil($rec->yards / $rec->length);
         $rec->save();
     }
 

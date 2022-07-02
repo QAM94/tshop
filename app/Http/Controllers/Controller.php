@@ -33,7 +33,7 @@ class Controller extends BaseController
     protected $show_url_in_list = [];
     protected $show_check_in_list = [];
     protected $hasManualSearch = [];
-    protected $hasRawCodeColumn = ['price','created_at'];
+    protected $hasRawCodeColumn = ['price', 'created_at', 'amount'];
     protected $currency = 'SR';
 
     protected $actions = ['add', 'edit', 'delete'];
@@ -43,7 +43,7 @@ class Controller extends BaseController
     final function getElementViews()
     {
         //return ['image', 'toggle', 'url', 'dropdown', 'comment'];
-        return ['status','image', 'url', 'check'];
+        return ['status', 'image', 'url', 'check'];
     }
 
     final function makeDataTable($data, $actions, $module)
@@ -61,7 +61,7 @@ class Controller extends BaseController
             foreach ($this->rawColumns as $rawCol) {
                 $compact_arr = $rawCol == 'actions' ?
                     compact('module', 'buttons', 'actions') : compact('module');
-                $view = $this->layout_base . '.' .$this->{$rawCol.'_view'};
+                $view = $this->layout_base . '.' . $this->{$rawCol . '_view'};
                 $data_table->addColumn($rawCol, function ($row) use ($view, $compact_arr) {
                     $compact_arr['row'] = $row;
                     return View::make($view, $compact_arr)->render();
@@ -74,8 +74,8 @@ class Controller extends BaseController
                 if ($code_col == 'parent') {
                     return !empty($row->parent) ? $row->parent->title : 'N/A';
                 }
-                if ($code_col == 'price') {
-                    return $this->currency.$row->price;
+                if (in_array($code_col, ['price', 'total', 'remaining_payment', 'advance_payment'])) {
+                    return !empty($row->{$code_col}) ? $this->currency . $row->{$code_col} : 'N/A';
                 }
                 if ($code_col == 'created_at') {
                     return !empty($row->created_at) ? date('jS M Y h:i A',
@@ -85,13 +85,13 @@ class Controller extends BaseController
         }
 
         $list_elements = $this->getElementViews();
-        if(!empty($list_elements)){
+        if (!empty($list_elements)) {
             foreach ($list_elements as $list_element) {
                 $key = 'show_' . $list_element . '_in_list';
                 $val = $list_element . '_view';
                 if (!empty($this->$key)) {
                     $data = $list_element == 'dropdown' ? $this->show_drop_down_model->get() : NULL;
-                    $func = in_array($list_element,['url','comment']) ? 'editColumn' : 'addColumn';
+                    $func = in_array($list_element, ['url', 'comment']) ? 'editColumn' : 'addColumn';
                     $this->makeDataTableColumnElement($this->$key, $data_table, $this->$val, $data, $func);
                 }
             }

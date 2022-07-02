@@ -21,7 +21,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-3">
                 <label for="" class="mb-1 d-block">Store Name</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="">
+                <input type="text" name="name" id="name" class="form-control" />
             </div>
         </div>
         <div class="col-sm-12">

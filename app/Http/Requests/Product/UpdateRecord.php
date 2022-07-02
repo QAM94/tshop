@@ -30,7 +30,7 @@ class UpdateRecord extends FormRequest
             'description' => 'nullable|max:255',
             'price' => 'nullable|numeric|max:1000000',
             'quantity' => 'required|numeric|max:100000',
-            'length' => 'required|numeric|max:10'
+            'length' => 'required|numeric|max:100'
         ];
     }
 }

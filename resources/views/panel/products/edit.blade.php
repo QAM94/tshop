@@ -43,22 +43,31 @@
                 <input type="text" name="title" id="title" class="form-control" value="{{ $data->title }}">
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Quantity</label>
-                <input type="text" name="quantity" id="quantity" class="form-control" value="{{ @$data->inventory->quantity }}">
+                <input type="number" name="quantity" id="quantity" class="form-control ydsUnit" step="any"
+                       value="{{ @$data->inventory->quantity }}" />
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group mb-3">
-                <label class="mb-1 d-block">Price</label>
-                <input type="text" name="price" id="price" class="form-control" value="{{ $data->price }}">
+                <label class="mb-1 d-block">Yards Per Unit</label>
+                <input type="number" name="length" id="length" class="form-control ydsUnit" step="any"
+                       value="{{ @$data->inventory->length }}" />
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Yards</label>
-                <input type="text" name="length" id="length" class="form-control" value="{{ @$data->inventory->length }}">
+                <input type="number" name="yards" id="yards" class="form-control" step="any"
+                       value="{{ @$data->inventory->yards }}" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">Price</label>
+                <input type="text" name="price" id="price" class="form-control" value="{{ $data->price }}" />
             </div>
         </div>
         <div class="col-sm-12">

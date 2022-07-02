@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 class ReceiptDetail extends Model
 {
 
-    protected $fillable = ['receipt_id', 'product_id', 'quantity', 'price', 'unit', 'description'];
+    protected $fillable = ['receipt_id', 'product_id', 'yards', 'price', 'unit'];
 
     public $timestamps = FALSE;
 
@@ -36,14 +36,13 @@ class ReceiptDetail extends Model
                     'receipt_id' => $request->id,
                     'product_id' => $val,
                 ], [
-                    'quantity' => $request['quantity'][$key],
+                    'yards' => $request['yards'][$key],
                     'unit_price' => $request['unit_price'][$key],
-                    'price' => $request['price'][$key],
-                    'description' => $request['description'][$key]
+                    'price' => $request['price'][$key]
                 ]);
-                Inventory::updateQty($val, $request['quantity'][$key]);
+                Inventory::updateStock($val, $request['yards'][$key]);
                 $sale_model = new SalesPurchase();
-                $sale_model->createSale($product, $request['quantity'][$key]);
+                $sale_model->createSale($product, $request['yards'][$key]);
             }
         }
     }
@@ -56,9 +55,7 @@ class ReceiptDetail extends Model
     public function deleteRecord($id)
     {
         $data = $this->findOrFail($id);
-        $inventory = Inventory::where(['product_id' => $data->product_id])->first();
-        $inventory->length = $inventory->length + $data->quantity;
-        $inventory->save();
+        Inventory::updateStock($data->product_id, $data->yards, 'purchase');
         $data->delete();
 
         return $id;

@@ -11,33 +11,36 @@ class Receipt extends Model
     use SoftDeletes, EloquentJoin;
 
     protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount',
-        'total', 'advance_payment', 'remaining_payment', 'is_active'];
+        'total', 'advance_payment', 'remaining_payment', 'description', 'is_active'];
 
     protected $with = ['details'];
 
-    public function shop() {
+    public function shop()
+    {
         return $this->belongsTo(Shop::class, 'shop_id');
     }
 
-    public function customer() {
+    public function customer()
+    {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
-    public function details() {
-        return $this->hasMany(ReceiptDetail::class, 'receipt_id','id');
+    public function details()
+    {
+        return $this->hasMany(ReceiptDetail::class, 'receipt_id', 'id');
     }
 
     public function getColumnsForDataTable()
     {
         $data[] = ['data' => 'receipt_no', 'name' => 'receipt_no', 'title' => 'Receipt No'];
-        if(!isset(auth()->user()->store->id)) {
+        if (!isset(auth()->user()->store->id)) {
             $data[] = ['data' => 'shop.name', 'name' => 'shop.name', 'title' => 'Shop'];
         }
         array_push($data,
             ['data' => 'customer.name', 'name' => 'customer.name', 'title' => 'Customer'],
-            ['data' => 'sub_total', 'name' => 'sub_total', 'title' => 'Sub Total'],
-            ['data' => 'discount', 'name' => 'discount', 'title' => 'Discount'],
-            ['data' => 'total', 'name' => 'total', 'title' => 'Total'],
+            ['data' => 'total', 'name' => 'total', 'title' => 'Amount'],
+            ['data' => 'advance_payment', 'name' => 'advance_payment', 'title' => 'Advance Payment'],
+            ['data' => 'remaining_payment', 'name' => 'remaining_payment', 'title' => 'Remaining Payment'],
             ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?', 'searchable' => 'false', 'nosort' => 'true'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
         );
@@ -56,12 +59,12 @@ class Receipt extends Model
 
     public function ajaxListing()
     {
-        return $this->query()->with(['shop','customer']);
+        return $this->query()->with(['shop', 'customer']);
     }
 
     public function findRecord($id)
     {
-        return $this->with(['shop','customer'])->find($id);
+        return $this->with(['shop', 'customer'])->find($id);
     }
 
     public function createRecord($request)
@@ -89,7 +92,8 @@ class Receipt extends Model
         return $this->where('is_active', 1)->get();
     }
 
-    public function updateDetails($record) {
+    public function updateDetails($record)
+    {
         $detail_model = new ReceiptDetail();
         $record->sub_total = $detail_model->getTotal($record->id);
         $record->total = $record->sub_total - $record->discount;

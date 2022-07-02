@@ -46,12 +46,8 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input type="text" name="quantity" id="quantity" class="form-control"
-                                               placeholder="Quantity">
-                                    </div>
-                                    <div class="col-sm-2">
-                                            <input type="text" name="length" id="length" class="form-control"
-                                                   placeholder="Yards">
+                                        <input type="number" name="yards" class="form-control" step="any"
+                                               placeholder="Yards">
                                     </div>
                                     <div class="col-sm-1">
                                         <button class="btn btn-sm btn-success tx-12" type="submit">Submit</button>
@@ -108,6 +104,10 @@
                     showErrorMsgs(err);
                 }
             });
+        });
+
+        $(document).on('keyup keypress change', '.ydsUnit', function () {
+            $("#yards").val($("#length").val() * $("#quantity").val());
         });
     </script>
 @endpush

@@ -35,13 +35,13 @@
         <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Quantity</label>
-                <input type="text" name="quantity" id="quantity" class="form-control" placeholder="">
+                <input type="text" name="quantity" id="quantity" class="form-control" />
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Price</label>
-                <input type="text" name="price" id="price" class="form-control" placeholder="">
+                <input type="text" name="price" id="price" class="form-control" />
             </div>
         </div>
     </div>
