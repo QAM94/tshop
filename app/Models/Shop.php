@@ -40,36 +40,9 @@ class Shop extends Model
 
         static::deleting(function ($store) {
 
-            foreach ($store->cashiers as $storeCashiers) {
-                $storeCashiers->delete();
-            }
-
-            /*if(isset($store->user)) {
-                foreach ($store->user as $storeUser) {
-                    $storeUser->delete();
-                }
-            }*/
-            //!isset($user->token) ?: $user->token->delete();
-
-            foreach ($store->customers as $storeCustomers) {
+            /*foreach ($store->customers as $storeCustomers) {
                 $storeCustomers->delete();
-            }
-
-            foreach ($store->recalls as $storeRecalls) {
-                $storeRecalls->delete();
-            }
-
-            foreach ($store->customerRecalls as $storeCustomerRecalls) {
-                $storeCustomerRecalls->delete();
-            }
-
-            foreach ($store->emailTemps as $storeEmailTemps) {
-                $storeEmailTemps->delete();
-            }
-
-            foreach ($store->smsTemps as $storeSmsTemps) {
-                $storeSmsTemps->delete();
-            }
+            }*/
 
         });
     }
@@ -90,39 +63,24 @@ class Shop extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function cashiers()
-    {
-        return $this->hasMany(User::class, 'shop_id')->where('role','agent');
-    }
-
     public function customers()
     {
         return $this->hasMany(Customer::class, 'shop_id');
     }
 
-    public function recalls()
+    public function products()
     {
-        return $this->hasMany(ShopsRecall::class, 'shop_id');
+        return $this->hasMany(Product::class, 'shop_id');
     }
 
-    public function customerRecalls()
+    public function receipts()
     {
-        return $this->hasMany(CustomerRecall::class, 'shop_id');
-    }
-
-    public function emailTemps()
-    {
-        return $this->hasMany(EmailTemplate::class, 'shop_id');
-    }
-
-    public function smsTemps()
-    {
-        return $this->hasMany(SmsTemplate::class, 'shop_id');
+        return $this->hasMany(Receipt::class, 'shop_id');
     }
 
     public function logo()
     {
-        return $this::hasOne(Upload::class, 'model_ref_id', 'store_id');
+        return $this::hasOne(Upload::class, 'model_ref_id', 'shop_id');
     }
 
     public function createRecord($request)
@@ -173,5 +131,11 @@ class Shop extends Model
     public function ajaxListing()
     {
         return $this::query()->with('logo');
+    }
+
+    public function getDashboardTableData()
+    {
+        return $this->withCount(['products', 'receipts', 'customers'])
+            ->where('is_active', '1')->orderBy('name')->get();
     }
 }

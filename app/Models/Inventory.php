@@ -20,7 +20,7 @@ class Inventory extends Model
         ], [
             'quantity' => $request->quantity,
             'length' => $request->length,
-            'yards' => $request->length * $request->quantity,
+            'yards' => $request->yards,
             'unit' => $request->unit,
         ]);
     }
