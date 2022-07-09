@@ -57,7 +57,7 @@ class ReceiptsController extends Controller
 
     public function store(StoreRecord $storeRecord)
     {
-        if($storeRecord->customer_id == 'new'){
+        if(!is_numeric($storeRecord->customer_id)){
             $customer = $this->customer_model->createRecord($storeRecord);
             $storeRecord->merge(['customer_id' => $customer->id]);
         }

@@ -11,7 +11,8 @@ class Receipt extends Model
     use SoftDeletes, EloquentJoin;
 
     protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount', 'vat',
-        'total', 'advance_payment', 'remaining_payment', 'description', 'is_active'];
+        'total', 'advance_payment', 'remaining_payment', 'description', 'own_cloth', 'items_sold',
+        'is_active'];
 
     protected $with = ['details'];
 
@@ -38,11 +39,11 @@ class Receipt extends Model
         }
         array_push($data,
             ['data' => 'customer.name', 'name' => 'customer.name', 'title' => 'Customer'],
+            ['data' => 'customer.phone_number', 'name' => 'customer.phone_number', 'title' => 'Customer Contact'],
             ['data' => 'total', 'name' => 'total', 'title' => 'Amount'],
-            ['data' => 'advance_payment', 'name' => 'advance_payment', 'title' => 'Advance Payment'],
-            ['data' => 'remaining_payment', 'name' => 'remaining_payment', 'title' => 'Remaining Payment'],
-            ['data' => 'is_active', 'name' => 'is_active', 'title' => 'Is Active?', 'searchable' => 'false', 'nosort' => 'true'],
-            ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
+            ['data' => 'advance_payment', 'name' => 'advance_payment', 'title' => 'Advance'],
+            ['data' => 'remaining_payment', 'name' => 'remaining_payment', 'title' => 'Remaining'],
+             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
         );
 
         return json_encode($data);

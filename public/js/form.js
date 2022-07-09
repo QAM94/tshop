@@ -14,7 +14,7 @@ $(document).on('change', '#shop_id', function () {
         $("#product_id").attr('disabled', false);
         $.each(data, function (key, row) {
             $("#product_id").append('<option value=' + row.id + '>' + row.title + ' ($' + row.price
-                + ' per '  + row.inventory.unit + ')</option>');
+                + ' per ' + row.inventory.unit + ')</option>');
         });
     });
 });
@@ -84,17 +84,17 @@ function calculateBill(selector) {
 
 function calculateTotal() {
     let sub_total = $("#sub_total").val();
-    let vat = $("#vat").val();
+    let vat = 1 + ($("#vat").val() / 100);//0.6
     let discount = $("#discount").val();
-    let total = parseFloat(sub_total) + parseFloat(vat) - parseFloat(discount);
+    let total = parseFloat(sub_total) * parseFloat(vat) - parseFloat(discount);
     $("#total").val(total);
     let advance = $("#advance_payment").val();
     $("#remaining_payment").val(total - advance);
 }
 
-$(document).on("click", ".removeRow", function() {
+$(document).on("click", ".removeRow", function () {
     let id = $(this).data('id');
-    if(id > 0) {
+    if (id > 0) {
         deleteRow(id, 'receipt-details');
     }
     $(this).closest('.row').remove();
@@ -103,7 +103,7 @@ $(document).on("click", ".removeRow", function() {
 $(document).on('click', '#addDetailsBtn', function () {
     $("#addDetailsBtn").hide();
     $("#removeDetailsBtn").show();
-    $("#editorDiv").css('display','inline');
+    $("#editorDiv").css('display', 'inline');
 });
 
 $(document).on('click', '#removeDetailsBtn', function () {

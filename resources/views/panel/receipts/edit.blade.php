@@ -83,8 +83,19 @@
     </div>
     <hr/>
     <div class="row">
-        <div class="col-sm-7">
-            <div class="row"  style="float: right">
+        <div class="col-sm-6">
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">Quantity of Items Sold</label>
+                <input type="text" name="items_sold" id="items_sold" class="form-control"
+                       value="{{ $data->items_sold }}"/>
+            </div>
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">
+                    <input type="checkbox" name="own_cloth" id="own_cloth" value="1"
+                        {{ $data->own_cloth ? 'checked' : ''}} /> Customer's Own Cloth?</label>
+            </div>
+
+            <!--            <div class="row"  style="float: right">
                 <button type="button" class="btn btn-success" style="padding: 3px 15px;
                 {{ empty($data->description) ? '' : 'display:none;' }}" id="addDetailsBtn">
                     <i class="ion-ios-add-circle-outline"></i> Add Extra Details
@@ -96,7 +107,7 @@
             </div>
             <div class="row" id="editorDiv" style="display:{{ empty($data->description) ? 'none;' : 'inline;' }};">
                 <textarea  id="summernote" name="description"></textarea >
-            </div>
+            </div>-->
         </div>
         <div class="col-sm-5">
             <div class="row">
@@ -106,7 +117,7 @@
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">VAT</p>
-                <input type="number" class="form-control col-sm-3" name="vat" id="vat" min="0"
+                <input type="number" class="form-control col-sm-3" name="vat" id="vat" min="0" max="100"
                        value="{{ $data->vat ? $data->vat : 0 }}" step="any">
             </div>
             <div class="row">
@@ -145,16 +156,16 @@
     </div>
 </form>
 <script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-            placeholder: 'write here...',
-            toolbar: [
-                ['font', ['fontsize']],
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']]
-            ]
-        });
-        $("#summernote").summernote("code", "{!! $data->description !!}");
-    });
+    /* $(document).ready(function() {
+         $('#summernote').summernote({
+             placeholder: 'write here...',
+             toolbar: [
+                 ['font', ['fontsize']],
+                 ['style', ['bold', 'italic', 'underline', 'clear']],
+                 ['color', ['color']],
+                 ['para', ['ul', 'ol', 'paragraph']]
+             ]
+         });
+         $("#summernote").summernote("code", "{!! $data->description !!}");
+    });*/
 </script>

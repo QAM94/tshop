@@ -44,35 +44,45 @@
     </div>
     <hr/>
     <div class="row">
-        <div class="col-sm-7">
-            <div class="row"  style="float: right">
-                <button type="button" class="btn btn-success" style="padding: 3px 15px;"
-                        id="addDetailsBtn">
-                    <i class="ion-ios-add-circle-outline"></i> Add Extra Details
-                </button>
-                <button type="button" class="btn btn-danger" style="padding: 3px 15px; display:none;"
-                        id="removeDetailsBtn">
-                    <i class="ion-md-close"></i>
-                </button>
+        <div class="col-sm-6">
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">Quantity of Items Sold</label>
+                <input type="text" name="items_sold" id="items_sold" class="form-control"/>
             </div>
-            <div class="row" id="editorDiv" style="display:none;">
-                <textarea  id="summernote" name="description"></textarea >
+            <div class="form-group mb-3">
+                <label class="mb-1 d-block">
+                    <input type="checkbox" name="own_cloth" id="own_cloth" value="1" />
+                    Customer's Own Cloth?</label>
             </div>
+
+            <!--            <div class="row"  style="float: right">
+                            <button type="button" class="btn btn-success" style="padding: 3px 15px;"
+                                    id="addDetailsBtn">
+                                <i class="ion-ios-add-circle-outline"></i> Add Extra Details
+                            </button>
+                            <button type="button" class="btn btn-danger" style="padding: 3px 15px; display:none;"
+                                    id="removeDetailsBtn">
+                                <i class="ion-md-close"></i>
+                            </button>
+                        </div>
+                        <div class="row" id="editorDiv" style="display:none;">
+                            <textarea  id="summernote" name="description"></textarea >
+                        </div>-->
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-6">
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
                 <input type="number" class="form-control col-sm-3" id="sub_total" name="sub_total"/>
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">VAT</p>
-                <input type="number" class="form-control col-sm-3" name="vat" id="vat" min="0"
-                       step="any"/>
+                <input type="number" class="form-control col-sm-3" name="vat" id="vat" min="0" value="0"
+                       step="any" max="100" />
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
                 <input type="number" class="form-control col-sm-3" name="discount" id="discount" min="0"
-                       step="any"/>
+                       value="0" step="any"/>
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
@@ -80,7 +90,8 @@
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
-                <input type="number" class="form-control col-sm-3" id="advance_payment" name="advance_payment"/>
+                <input type="number" class="form-control col-sm-3" id="advance_payment" name="advance_payment"
+                       value="0"/>
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
@@ -93,15 +104,15 @@
     </div>
 </form>
 <script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-            placeholder: 'write here...',
-            toolbar: [
-                ['font', ['fontsize']],
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']]
-            ]
-        });
-    });
+    /* $(document).ready(function () {
+         $('#summernote').summernote({
+             placeholder: 'write here...',
+             toolbar: [
+                 ['font', ['fontsize']],
+                 ['style', ['bold', 'italic', 'underline', 'clear']],
+                 ['color', ['color']],
+                 ['para', ['ul', 'ol', 'paragraph']]
+             ]
+         });
+     });*/
 </script>
