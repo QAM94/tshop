@@ -57,6 +57,10 @@ $(document).on('keyup keypress change', '#sub_total', function () {
     calculateTotal();
 });
 
+$(document).on('keyup keypress change', '#vat', function () {
+    calculateTotal();
+});
+
 $(document).on('keyup keypress change', '#discount', function () {
     calculateTotal();
 });
@@ -80,8 +84,9 @@ function calculateBill(selector) {
 
 function calculateTotal() {
     let sub_total = $("#sub_total").val();
+    let vat = $("#vat").val();
     let discount = $("#discount").val();
-    let total = sub_total - discount;
+    let total = parseFloat(sub_total) + parseFloat(vat) - parseFloat(discount);
     $("#total").val(total);
     let advance = $("#advance_payment").val();
     $("#remaining_payment").val(total - advance);
@@ -93,4 +98,16 @@ $(document).on("click", ".removeRow", function() {
         deleteRow(id, 'receipt-details');
     }
     $(this).closest('.row').remove();
+});
+
+$(document).on('click', '#addDetailsBtn', function () {
+    $("#addDetailsBtn").hide();
+    $("#removeDetailsBtn").show();
+    $("#editorDiv").css('display','inline');
+});
+
+$(document).on('click', '#removeDetailsBtn', function () {
+    $("#editorDiv").hide();
+    $("#removeDetailsBtn").hide();
+    $("#addDetailsBtn").show();
 });

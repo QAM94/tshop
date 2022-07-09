@@ -5,7 +5,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Receipt No</label>
-                <input type="text" name="receipt_no" id="receipt_no" class="form-control" />
+                <input type="text" name="receipt_no" id="receipt_no" class="form-control"/>
             </div>
         </div>
         <div class="col-sm-6">
@@ -44,32 +44,47 @@
     </div>
     <hr/>
     <div class="row">
-        <div class="col-sm-6">
-            <label class="mb-1 d-block" style="font-weight: bold;">Extra Details</label>
-            <textarea class="form-control" name="description" rows="5"
-                      placeholder="Enter Extra Details Here..."></textarea>
+        <div class="col-sm-7">
+            <div class="row"  style="float: right">
+                <button type="button" class="btn btn-success" style="padding: 3px 15px;"
+                        id="addDetailsBtn">
+                    <i class="ion-ios-add-circle-outline"></i> Add Extra Details
+                </button>
+                <button type="button" class="btn btn-danger" style="padding: 3px 15px; display:none;"
+                        id="removeDetailsBtn">
+                    <i class="ion-md-close"></i>
+                </button>
+            </div>
+            <div class="row" id="editorDiv" style="display:none;">
+                <textarea  id="summernote" name="description"></textarea >
+            </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
-                <input type="number" class="form-control col-sm-3" id="sub_total" name="sub_total" />
+                <input type="number" class="form-control col-sm-3" id="sub_total" name="sub_total"/>
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">VAT</p>
+                <input type="number" class="form-control col-sm-3" name="vat" id="vat" min="0"
+                       step="any"/>
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
                 <input type="number" class="form-control col-sm-3" name="discount" id="discount" min="0"
-                       step="any" />
+                       step="any"/>
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Total</p>
-                <input type="number" class="form-control col-sm-3" id="total" name="total" />
+                <input type="number" class="form-control col-sm-3" id="total" name="total"/>
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Advance Payment</p>
-                <input type="number" class="form-control col-sm-3" id="advance_payment" name="advance_payment" />
+                <input type="number" class="form-control col-sm-3" id="advance_payment" name="advance_payment"/>
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Remaining Payment</p>
-                <input type="number" class="form-control col-sm-3" id="remaining_payment" name="remaining_payment" >
+                <input type="number" class="form-control col-sm-3" id="remaining_payment" name="remaining_payment">
             </div>
         </div>
         <div class="col-sm-12 text-right">
@@ -77,3 +92,16 @@
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: 'write here...',
+            toolbar: [
+                ['font', ['fontsize']],
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']]
+            ]
+        });
+    });
+</script>

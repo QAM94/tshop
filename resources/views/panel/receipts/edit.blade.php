@@ -83,16 +83,31 @@
     </div>
     <hr/>
     <div class="row">
-        <div class="col-sm-6">
-            <label class="mb-1 d-block" style="font-weight: bold;">Extra Details</label>
-            <textarea class="form-control" name="description" rows="5"
-                      placeholder="Enter Extra Details Here...">{{ $data->description }}</textarea>
+        <div class="col-sm-7">
+            <div class="row"  style="float: right">
+                <button type="button" class="btn btn-success" style="padding: 3px 15px;
+                {{ empty($data->description) ? '' : 'display:none;' }}" id="addDetailsBtn">
+                    <i class="ion-ios-add-circle-outline"></i> Add Extra Details
+                </button>
+                <button type="button" class="btn btn-danger" style="padding: 3px 15px;
+                {{ !empty($data->description) ? '' : 'display:none;' }}" id="removeDetailsBtn">
+                    <i class="ion-md-close"></i>
+                </button>
+            </div>
+            <div class="row" id="editorDiv" style="display:{{ empty($data->description) ? 'none;' : 'inline;' }};">
+                <textarea  id="summernote" name="description"></textarea >
+            </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Subtotal</p>
                 <input type="number" class="form-control col-sm-3" id="sub_total" name="sub_total"
                        value="{{ $data->sub_total }}">
+            </div>
+            <div class="row">
+                <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">VAT</p>
+                <input type="number" class="form-control col-sm-3" name="vat" id="vat" min="0"
+                       value="{{ $data->vat ? $data->vat : 0 }}" step="any">
             </div>
             <div class="row">
                 <p class="col-sm-8" style="margin: revert;text-align: right;font-weight: bold;">Discount</p>
@@ -129,8 +144,17 @@
         </div>
     </div>
 </form>
-@push('custom-scripts')
-    @once
-        <script src="{{ asset('js/form.js') }}"></script>
-    @endonce
-@endpush
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: 'write here...',
+            toolbar: [
+                ['font', ['fontsize']],
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']]
+            ]
+        });
+        $("#summernote").summernote("code", "{!! $data->description !!}");
+    });
+</script>

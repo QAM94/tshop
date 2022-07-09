@@ -1,6 +1,5 @@
 @extends('panel.master')
 @section('main')
-
     <div class="content ht-100v pd-0">
         <div class="content-body">
             <div class="container pd-x-0 tx-13">

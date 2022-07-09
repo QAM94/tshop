@@ -10,7 +10,7 @@ class Receipt extends Model
 {
     use SoftDeletes, EloquentJoin;
 
-    protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount',
+    protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount', 'vat',
         'total', 'advance_payment', 'remaining_payment', 'description', 'is_active'];
 
     protected $with = ['details'];
@@ -96,7 +96,7 @@ class Receipt extends Model
     {
         $detail_model = new ReceiptDetail();
         $record->sub_total = $detail_model->getTotal($record->id);
-        $record->total = $record->sub_total - $record->discount;
+        $record->total = $record->sub_total - $record->discount + $record->vat;
         $record->save();
     }
 }
