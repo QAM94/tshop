@@ -11,10 +11,19 @@ class Receipt extends Model
     use SoftDeletes, EloquentJoin;
 
     protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount', 'vat',
-        'total', 'advance_payment', 'remaining_payment', 'description', 'own_cloth', 'items_sold',
-        'is_active'];
+        'total', 'advance_payment', 'remaining_payment', 'description', 'own_cloth', 'is_active'];
 
     protected $with = ['details'];
+
+    protected  $appends = ['items_sold', 'own'];
+
+    public function getItemsSoldAttribute() {
+        return $this->details->sum('items_sold');
+    }
+
+    public function getOwnAttribute() {
+        return $this->own_cloth ? 'Yes' : 'No';
+    }
 
     public function shop()
     {
@@ -43,7 +52,9 @@ class Receipt extends Model
             ['data' => 'total', 'name' => 'total', 'title' => 'Amount'],
             ['data' => 'advance_payment', 'name' => 'advance_payment', 'title' => 'Advance'],
             ['data' => 'remaining_payment', 'name' => 'remaining_payment', 'title' => 'Remaining'],
-             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
+            ['data' => 'own', 'name' => 'own', 'title' => 'Own Cloth?'],
+            ['data' => 'items_sold', 'name' => 'items_sold', 'title' => 'Items Sold'],
+            ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
         );
 
         return json_encode($data);

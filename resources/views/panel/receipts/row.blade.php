@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-5">
         <div class="form-group mb-3">
             <label class="mb-1 d-block">Product</label>
             <select name="product_id[]" class="form-control proSel">
@@ -16,6 +16,13 @@
         <div class="form-group mb-3">
             <label class="mb-1 d-block">Yards</label>
             <input type="number" name="yards[]" class="form-control proQty" min="1"
+                   step="any" value="0">
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group mb-3">
+            <label class="mb-1 d-block">Items Sold</label>
+            <input type="number" name="items_sold[]" class="form-control" min="0"
                    step="any" value="0">
         </div>
     </div>

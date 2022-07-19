@@ -7,7 +7,7 @@ $(document).on('change', '#shop_id', function () {
         $("#customer_id").attr('disabled', false);
         $("#customer_id").append('<option value="new">New Customer</option>');
         $.each(data, function (key, row) {
-            $("#customer_id").append('<option value=' + row.id + '>' + row.name + '</option>');
+            $("#customer_id").append('<option value=' + row.id + '>' + row.name + ' - '+ row.phone_number +'</option>');
         });
     });
     $.get(base_url + "/products-by-shop/" + $(this).val(), function (data) {

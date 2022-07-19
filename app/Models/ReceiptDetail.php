@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 class ReceiptDetail extends Model
 {
 
-    protected $fillable = ['receipt_id', 'product_id', 'yards', 'price', 'unit'];
+    protected $fillable = ['receipt_id', 'product_id', 'yards', 'price', 'unit', 'items_sold'];
 
     public $timestamps = FALSE;
 
@@ -37,6 +37,7 @@ class ReceiptDetail extends Model
                     'product_id' => $val,
                 ], [
                     'yards' => $request['yards'][$key],
+                    'items_sold' => $request['items_sold'][$key],
                     'unit_price' => $request['unit_price'][$key],
                     'price' => $request['price'][$key]
                 ]);

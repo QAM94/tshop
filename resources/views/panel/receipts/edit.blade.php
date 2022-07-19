@@ -50,7 +50,7 @@
     <div id="detailsDiv">
         @foreach($data->details as $row)
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-5">
                     <div class="form-group mb-3">
                         <label class="mb-1 d-block">Product</label>
                         <select class="form-control proSel" disabled>
@@ -71,6 +71,13 @@
                                value="{{ $row->yards }}" min="1" step="any" disabled>
                     </div>
                 </div>
+                <div class="col-sm-3">
+                    <div class="form-group mb-3">
+                        <label class="mb-1 d-block">Items Sold</label>
+                        <input type="number" class="form-control" min="0"
+                               value="{{ $row->items_sold }}" step="any" value="0" disabled>
+                    </div>
+                </div>
                 <div class="col-sm-1">
                     <a href="javascript:;" class="removeRow" data-id="{{ $row->id }}">
                         <i class="ion-md-close"></i>
@@ -84,11 +91,6 @@
     <hr/>
     <div class="row">
         <div class="col-sm-6">
-            <div class="form-group mb-3">
-                <label class="mb-1 d-block">Quantity of Items Sold</label>
-                <input type="text" name="items_sold" id="items_sold" class="form-control"
-                       value="{{ $data->items_sold }}"/>
-            </div>
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">
                     <input type="checkbox" name="own_cloth" id="own_cloth" value="1"
