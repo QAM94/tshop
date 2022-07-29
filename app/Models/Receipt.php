@@ -11,14 +11,15 @@ class Receipt extends Model
     use SoftDeletes, EloquentJoin;
 
     protected $fillable = ['receipt_no', 'shop_id', 'customer_id', 'sub_total', 'discount', 'vat',
-        'total', 'advance_payment', 'remaining_payment', 'description', 'own_cloth', 'is_active'];
+        'total', 'advance_payment', 'remaining_payment', 'description', 'own_cloth', 'items_sold_qty',
+        'is_delivered', 'is_active'];
 
     protected $with = ['details'];
 
     protected  $appends = ['items_sold', 'own'];
 
     public function getItemsSoldAttribute() {
-        return $this->details->sum('items_sold');
+        return $this->items_sold_qty + $this->details->sum('items_sold');
     }
 
     public function getOwnAttribute() {
@@ -54,6 +55,7 @@ class Receipt extends Model
             ['data' => 'remaining_payment', 'name' => 'remaining_payment', 'title' => 'Remaining'],
             ['data' => 'own', 'name' => 'own', 'title' => 'Own Cloth?'],
             ['data' => 'items_sold', 'name' => 'items_sold', 'title' => 'Items Sold'],
+            ['data' => 'is_delivered', 'name' => 'is_delivered', 'title' => 'Delivery', 'searchable' => 'false', 'nosort' => 'true'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Action', 'searchable' => 'false', 'nosort' => 'true']
         );
 
@@ -110,5 +112,13 @@ class Receipt extends Model
         $record->sub_total = $detail_model->getTotal($record->id);
         $record->total = $record->sub_total - $record->discount + $record->vat;
         $record->save();
+    }
+
+    public function updateDelivered($id, $val)
+    {
+        $record = $this->find($id);
+        $record->is_delivered = $val;
+        $record->save();
+        return $record;
     }
 }

@@ -46,6 +46,10 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group mb-3">
+                <label class="mb-1 d-block">Quantity of Items Sold</label>
+                <input type="text" name="items_sold_qty" id="items_sold_qty" class="form-control"/>
+            </div>
+            <div class="form-group mb-3">
                 <label class="mb-1 d-block">
                     <input type="checkbox" name="own_cloth" id="own_cloth" value="1" />
                     Customer's Own Cloth?</label>

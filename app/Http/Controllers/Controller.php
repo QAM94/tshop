@@ -43,7 +43,7 @@ class Controller extends BaseController
     final function getElementViews()
     {
         //return ['image', 'toggle', 'url', 'dropdown', 'comment'];
-        return ['status', 'image', 'url', 'check'];
+        return ['status', 'toggle', 'image', 'url', 'check'];
     }
 
     final function makeDataTable($data, $actions, $module)

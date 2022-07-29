@@ -24,7 +24,7 @@ class ReceiptsController extends Controller
         $this->product_model = new Product();
         $this->dataAssign['module'] = 'receipts';
         $this->actions = ['view', 'edit'];
-        $this->show_status_in_list[] = ['column_name' => 'is_active', 'column_data' => 'is_active'];
+        $this->show_toggle_in_list[] = ['column_name' => 'is_delivered', 'column_data' => 'is_delivered'];
         $this->hasRawCodeColumn = ['total', 'advance_payment', 'remaining_payment', 'created_at'];
         $this->dataAssign['route_name_for_listing'] = $this->dataAssign['module'] . '.ajaxListing';
         $this->dataAssign['data_table_columns'] = $this->primary_model->getColumnsForDataTable();
@@ -57,14 +57,14 @@ class ReceiptsController extends Controller
 
     public function store(StoreRecord $storeRecord)
     {
-        if(!is_numeric($storeRecord->customer_id)){
+        if (!is_numeric($storeRecord->customer_id) && $storeRecord->customer_id == 'new') {
             $customer = $this->customer_model->createRecord($storeRecord);
             $storeRecord->merge(['customer_id' => $customer->id]);
         }
         $record = $this->primary_model->createRecord($storeRecord);
         $storeRecord->merge(['id' => $record->id]);
         $this->detail_model->updateRecord($storeRecord);
-       // $this->primary_model->updateDetails($record);
+        // $this->primary_model->updateDetails($record);
         return $record;
     }
 
@@ -99,6 +99,12 @@ class ReceiptsController extends Controller
     public function deleteDetail($id)
     {
         return $this->detail_model->deleteRecord($id);
+    }
+
+    public function updateDelivered($id, $val)
+    {
+        $this->primary_model->updateDelivered($id, $val);
+        return back();
     }
 
 }

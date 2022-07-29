@@ -142,12 +142,18 @@ class Product extends Model
             ], ['product_id' => $product->id,
                 'category_id' => $stock->category->id]);
 
-            $inventory = new Inventory();
-            $inv_stock = $inventory->where(['product_id' => $product->id])->first();
-            $inv_stock->yards = !empty($inv_stock) ? $inv_stock->yards + $request->yards : $request->yards;
-            $inv_stock->length = $stock->inventory->length;
-            $inv_stock->quantity = ceil($inv_stock->yards / $stock->inventory->length);
-            $inv_stock->save();
+            $inventory = Inventory::where(['product_id' => $product->id])->first();
+            if(!empty($inventory)) {
+                $inventory->yards =  $inventory->yards + $request->yards;
+            }
+            else{
+                $inventory = new Inventory();
+                $inventory->yards = $request->yards;
+            }
+            $inventory->product_id = $product->id;
+            $inventory->length = $stock->inventory->length;
+            $inventory->quantity = ceil($inventory->yards / $stock->inventory->length);
+            $inventory->save();
         }
     }
 }

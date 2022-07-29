@@ -7,7 +7,7 @@ $(document).on('change', '#shop_id', function () {
         $("#customer_id").attr('disabled', false);
         $("#customer_id").append('<option value="new">New Customer</option>');
         $.each(data, function (key, row) {
-            $("#customer_id").append('<option value=' + row.id + '>' + row.name + ' - '+ row.phone_number +'</option>');
+            $("#customer_id").append('<option value=' + row.id + '>' + row.name + ' - ' + row.phone_number + '</option>');
         });
     });
     $.get(base_url + "/products-by-shop/" + $(this).val(), function (data) {
@@ -110,4 +110,10 @@ $(document).on('click', '#removeDetailsBtn', function () {
     $("#editorDiv").hide();
     $("#removeDetailsBtn").hide();
     $("#addDetailsBtn").show();
+});
+
+$(document).on('change', '.delivery_chk', function () {
+    let id = $(this).data("id");
+    let val = $(this).is(":checked") ? 1 : 0;
+    window.location.href = base_url + "/receipts-update-delivered/" + id + "/" + val
 });

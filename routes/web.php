@@ -145,6 +145,12 @@ Route::group(['middleware' => ['auth', 'role', 'logout']], function () {
                     'url' => 'detail-row/{shop_id}',
                     'http_method' => 'get'
                 ],
+                [
+                    'route_name' => 'update-delivered',
+                    'method' => 'updateDelivered',
+                    'url' => 'update-delivered/{id}/{val}',
+                    'http_method' => 'get'
+                ],
             ]],
 
         ['module_name' => 'customers', 'controller_name' => 'Customers',
