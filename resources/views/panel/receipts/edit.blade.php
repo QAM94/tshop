@@ -94,7 +94,7 @@
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Quantity of Items Sold</label>
                 <input type="text" name="items_sold_qty" id="items_sold_qty" class="form-control"
-                value="{{ $data->items_sold }}" />
+                value="{{ $data->items_sold_qty }}" />
             </div>
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">

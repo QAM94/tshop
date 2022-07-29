@@ -24,10 +24,9 @@ class StoreRecord extends FormRequest
     public function rules()
     {
         return [
-            'phone_number' => 'required|regex:/\+\d{9,12}$/',
-            'email' => 'nullable|email',
             'name' => 'required|max:99',
-            'receipt_id' => 'required|min:6|max:16|regex:/^[a-zA-Z0-9\-]*$/'
+            'phone_number' => 'nullable|regex:/\+\d{9,12}$/',
+            'email' => 'nullable|email'
         ];
     }
 }
