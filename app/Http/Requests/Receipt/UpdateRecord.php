@@ -25,7 +25,19 @@ class UpdateRecord extends FormRequest
     {
         return [
             'shop_id' => 'required|exists:shops,id,deleted_at,NULL',
-            'customer_id' => 'required'
+            'customer_id' => 'required|numeric'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'customer_id.numeric' => 'Please select a customer'
         ];
     }
 }

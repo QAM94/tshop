@@ -27,8 +27,8 @@
         <div class="col-sm-6">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Customer</label>
-                <select name="customer_id" id="customer_id" class="form-control">
-                    <option>Please Select</option>
+                <select name="customer_id" id="customer_id" class="form-control" required>
+                    <option value="">Please Select</option>
                     @foreach($customers as $customer)
                         <option {{ $data->customer_id == $customer->id ? 'selected' : '' }}
                                 value="{{ $customer->id }}">

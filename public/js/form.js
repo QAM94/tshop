@@ -5,7 +5,7 @@ $(document).on('change', '#shop_id', function () {
     $("#product_id").empty().append('<option>Please Select</option>');
     $.get(base_url + "/customers-by-shop/" + $(this).val(), function (data) {
         $("#customer_id").attr('disabled', false);
-        $("#customer_id").append('<option value="new">New Customer</option>');
+        $("#customer_id").append('<option value=0>New Customer</option>');
         $.each(data, function (key, row) {
             $("#customer_id").append('<option value=' + row.id + '>' + row.name + ' - ' + row.phone_number + '</option>');
         });
@@ -32,7 +32,7 @@ $(document).on('click', '.addRow', function () {
 $(document).on('change', '#customer_id', function () {
     $("#customerDiv").empty();
     let customer_id = $("#customer_id").val();
-    if (customer_id == 'new') {
+    if (customer_id == 0) {
         $.get(base_url + "/customers-form/", function (data) {
             $("#customerDiv").append(data);
         });

@@ -24,8 +24,8 @@
         <div class="col-sm-6">
             <div class="form-group mb-3">
                 <label class="mb-1 d-block">Customer</label>
-                <select name="customer_id" id="customer_id" class="form-control sel2" disabled>
-                    <option>Please Select</option>
+                <select name="customer_id" id="customer_id" class="form-control" disabled required>
+                    <option value="">Please Select</option>
                 </select>
             </div>
         </div>
