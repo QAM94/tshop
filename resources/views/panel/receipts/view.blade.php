@@ -8,43 +8,79 @@
                             <div class="element-box">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="card card-border-color card-border-color-primary cus-card-bg">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <p><b>Shop: </b>{{ $data->shop->name }}</p>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <p><b>Customer: </b>{{ $data->customer->name }}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row" style="border-bottom: 1px solid #bfbfbf;
-                                                border-top: 1px solid #bfbfbf; padding-top: 10px;
-                                                margin-bottom: 10px;">
-                                                    <h6 class="col-sm-8">Product</h6>
-                                                    <h6 class="col-sm-2">Quantity</h6>
-                                                    <h6 class="col-sm-2">Price</h6>
-                                                </div>
-                                                @foreach($data->details as $row)
-                                                    <div class="row">
-                                                        <p class="col-sm-8">{{ $row->product->title }}
-                                                            ({{ $row->product->price }}/{{ $row->product->inventory->measure.$row->product->inventory->unit }})</p>
-                                                        <p class="col-sm-2">{{ $row->quantity }}</p>
-                                                        <p class="col-sm-2">{{$currency}}{{ $row->price }}</p>
-                                                    </div>
-                                                @endforeach
-                                                <div class="row" style="border-top: 1px solid #bfbfbf;
-                                                padding-top: 10px;
-                                                margin-bottom: 10px;">
-                                                    <div class="col-sm-10" style="text-align: right;font-weight: bold;">Subtotal</div>
-                                                    <div class="col-sm-2">{{$currency}}{{$data->sub_total }}</div>
-                                                    <div class="col-sm-10" style="text-align: right;font-weight: bold;">Discount</div>
-                                                    <div class="col-sm-2">{{$currency}}{{ $data->discount ? $data->discount : 0 }}</div>
-                                                    <div class="col-sm-10" style="text-align: right;font-weight: bold;">Total</div>
-                                                    <div class="col-sm-2">{{$currency}}{{ $data->total }}</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <button class="btn btn-primary" onclick="printReceipt();"
+                                                style="float: right">
+                                            <i class="fa fa-print"></i> Print
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-12" id="printDiv">
+                                        <table border="0" style="width:60%; text-align: center">
+                                            <tr>
+                                                <td>
+                                                    <h3>{{ $data->shop->name }}</h3>
+                                                    {{ $data->shop->address }}<br/>
+                                                    {{ $data->shop->email }}<br/>
+                                                    {{ $data->shop->contact }}<br/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table border="1" cellpadding="10" style="width:60%; border-collapse: collapse;">
+                                            <tr>
+                                                <td><b>Time</b><br/>
+                                                    {{ date('H:i:s', strtotime($data->created_at))  }}
+                                                </td>
+                                                <td><b>Date</b><br/>
+                                                    {{ date('Y m d', strtotime($data->created_at))  }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br/>
+                                        <table border="1" cellpadding="7" style="width:60%; border-collapse: collapse;">
+                                            <tr>
+                                                <th>BILL#</th>
+                                                <th>ITEM</th>
+                                                <th>QUANTITY</th>
+                                                <th>PRICE</th>
+                                                <th>TOTAL</th>
+                                            </tr>
+                                            @foreach($data->details as $row)
+                                                <tr>
+                                                    <td>{{ $row->id }}</td>
+                                                    <td>{{ $row->product->title }}</td>
+                                                    <td>{{ $row->yards }}</td>
+                                                    <td>{{ number_format($row->unit_price, 2) }}</td>
+                                                    <td>{{ number_format($row->price, 2) }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                        <br/>
+                                        <table border="1" cellpadding="5" style="width:60%; text-align: left;
+                                        border-collapse: collapse;">
+                                            <tr>
+                                                <th>SUBTOTAL</th>
+                                                <td>{{ number_format($data->sub_total, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>DISCOUNT</th>
+                                                <td>{{ number_format($data->discount, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>TAX</th>
+                                                <td>{{ number_format($data->vat, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>TOTAL</th>
+                                                <td>{{ number_format($data->total, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>ADVANCE</th>
+                                                <td>{{ number_format($data->advance_payment, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>REMAINING</th>
+                                                <td>{{ number_format($data->remaining_payment, 2) }}</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -55,3 +91,4 @@
         </div>
     </div>
 </div>
+

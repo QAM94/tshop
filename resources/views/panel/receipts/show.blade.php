@@ -29,6 +29,17 @@
 @endsection
 @push('custom-scripts')
         <script src="{{ asset('js/form.js') }}"></script>
+        <script>
+            function printReceipt() {
+                let divToPrint=document.getElementById('printDiv');
+                let win=window.open('','Print-Window');
+                win.document.open();
+                win.document.write('<html><body onload="window.print()">'+printDiv.innerHTML+'</body></html>');
+                win.document.body.style.fontFamily="IBM Plex Sans, sans-serif";
+                win.document.close();
+                setTimeout(function(){win.close();},10);
+            }
+        </script>
 @endpush
 
 
