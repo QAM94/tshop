@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/check-auth', config('filesystems.PANEL_CONTROLLER_PATH') . 'DashboardController@checkAuth')->name('check_auth');
