@@ -63,7 +63,7 @@ class ReceiptDetail extends Model
         return $id;
     }
 
-    public function getItemsTableData($rangeArr)
+    public function getItemsTableData($rangeArr, $shop_id = 0)
     {
         $query = DB::table('receipt_details')
             ->join('receipts', 'receipts.id', '=', 'receipt_details.receipt_id')
@@ -73,6 +73,9 @@ class ReceiptDetail extends Model
                 DB::raw('SUM(receipts.total) AS net_sales'));
         if (!empty($rangeArr)) {
             $query->whereBetween('receipts.created_at', $rangeArr);
+        }
+        if ($shop_id > 0) {
+            $query->where('receipts.shop_id', $shop_id);
         }
         $query->groupBy('receipt_details.product_id')->orderBy('items_sold', 'DESC')->limit(5);
         return $query->get();

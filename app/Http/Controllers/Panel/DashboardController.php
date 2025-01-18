@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Receipt;
 use App\Models\ReceiptDetail;
 use App\Models\Shop;
+use App\Models\ShopUser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +27,12 @@ class DashboardController extends Controller
         if (!empty($request->start) && !empty($request->end)) {
             $range = 1;
         }
+        $data['module'] = $this->dataAssign['module'];
+        $data['data_table_items'] = [];
+        $data['data_table_shops'] = [];
+        $data['route_name_for_listing'] = [];
+        $rangeArr = [];
         if (auth()->user()->role == 'admin') {
-            $data['module'] = $this->dataAssign['module'];
-            $rangeArr = [];
             if (!empty($request->start) && !empty($request->end)) {
                 $rangeArr = [$request->start, $request->end];
                 $data['total_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
@@ -59,9 +63,18 @@ class DashboardController extends Controller
             $data['route_name_for_listing'] = $data['module'] . '.ajaxListing';
             return view($this->layout_base . '.' . $this->dataAssign['module'] . '.show', $data);
         }
-        if (auth()->user()->role == 'store') {
-            $data['module'] = $this->dataAssign['module'];
-            $data['route_name_for_listing'] = $data['module'] . '.storeAjaxListing';
+        if (auth()->user()->role == 'shop') {
+            $shop_id = ShopUser::where('user_id', auth()->user()->id)->first()->shop_id;
+            $data['total_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
+                ->sum('total');
+            $data['net_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
+                ->sum('sub_total');
+            $data['total_orders'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
+                ->count();
+            $data['total_items_sold'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
+                ->sum('items_sold_qty');
+
+            $data['data_table_items'] = $this->receipt_model->getItemsTableData($rangeArr, $shop_id);
             return view($this->layout_base . '.' . $this->dataAssign['module'] . '.show', $data);
         }
 

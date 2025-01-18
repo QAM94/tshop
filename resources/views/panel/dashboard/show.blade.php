@@ -4,13 +4,12 @@
     <div class="content ht-100v pd-0">
         <div class="content-body">
             <div class="container pd-x-0 tx-13">
-
-                <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <input type="text" name="daterange" class="form-control"/>
-                    </div>
-                </div>
                 @if (auth()->user()->role == 'admin')
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <input type="text" name="daterange" class="form-control"/>
+                        </div>
+                    </div>
                     <div class="row row-xs mb-3">
                         <div class="col-sm-4 col-lg-3">
                             <div class="card card-body text-center">
