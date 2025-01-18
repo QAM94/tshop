@@ -64,17 +64,19 @@ class DashboardController extends Controller
             return view($this->layout_base . '.' . $this->dataAssign['module'] . '.show', $data);
         }
         if (auth()->user()->role == 'shop') {
-            $shop_id = ShopUser::where('user_id', auth()->user()->id)->first()->shop_id;
-            $data['total_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
-                ->sum('total');
-            $data['net_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
-                ->sum('sub_total');
-            $data['total_orders'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
-                ->count();
-            $data['total_items_sold'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop_id])
-                ->sum('items_sold_qty');
+            $shop = ShopUser::where('user_id', auth()->user()->id)->first();
+            if(!empty($shop)) {
+                $data['total_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop->id])
+                    ->sum('total');
+                $data['net_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop->id])
+                    ->sum('sub_total');
+                $data['total_orders'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop->id])
+                    ->count();
+                $data['total_items_sold'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1, 'shop_id' => $shop->id])
+                    ->sum('items_sold_qty');
+                $data['data_table_items'] = $this->receipt_model->getItemsTableData($rangeArr, $shop->id);
+            }
 
-            $data['data_table_items'] = $this->receipt_model->getItemsTableData($rangeArr, $shop_id);
             return view($this->layout_base . '.' . $this->dataAssign['module'] . '.show', $data);
         }
 
