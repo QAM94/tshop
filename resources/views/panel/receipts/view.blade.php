@@ -10,7 +10,7 @@
                                     <div class="col-lg-12">
                                         <button class="btn btn-primary" onclick="printReceipt();"
                                                 style="float: right">
-                                            <i class="fa fa-print"></i> Print
+                                            <i class="ion-ios-print"></i> Print
                                         </button>
                                     </div>
                                     <div class="col-lg-12" id="printDiv">
@@ -46,7 +46,7 @@
                                             @foreach($data->details as $row)
                                                 <tr>
                                                     <td>{{ $row->id }}</td>
-                                                    <td>{{ $row->product->title }}</td>
+                                                    <td>{{ @$row->product->title }}</td>
                                                     <td>{{ $row->yards }}</td>
                                                     <td>{{ number_format($row->unit_price, 2) }}</td>
                                                     <td>{{ number_format($row->price, 2) }}</td>

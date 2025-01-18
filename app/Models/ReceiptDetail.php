@@ -5,6 +5,7 @@ namespace App\Models;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use DB;
 
 class ReceiptDetail extends Model
 {
@@ -60,5 +61,20 @@ class ReceiptDetail extends Model
         $data->delete();
 
         return $id;
+    }
+
+    public function getItemsTableData($rangeArr)
+    {
+        $query = DB::table('receipt_details')
+            ->join('receipts', 'receipts.id', '=', 'receipt_details.receipt_id')
+            ->join('products', 'products.id', '=', 'receipt_details.product_id')
+            ->whereNull('receipts.deleted_at')->where(['receipts.is_active' => 1])
+            ->select('products.title', DB::raw('count(receipts.items_sold_qty) AS items_sold'),
+                DB::raw('SUM(receipts.total) AS net_sales'));
+        if (!empty($rangeArr)) {
+            $query->whereBetween('receipts.created_at', $rangeArr);
+        }
+        $query->groupBy('receipt_details.product_id')->orderBy('items_sold', 'DESC')->limit(5);
+        return $query->get();
     }
 }

@@ -4,37 +4,78 @@
     <div class="content ht-100v pd-0">
         <div class="content-body">
             <div class="container pd-x-0 tx-13">
+
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <input type="text" name="daterange" class="form-control"/>
+                    </div>
+                </div>
                 @if (auth()->user()->role == 'admin')
                     <div class="row row-xs mb-3">
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-4 col-lg-3">
                             <div class="card card-body text-center">
                                 <h6 class="tx-uppercase tx-15 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total
-                                    Shops</h6>
+                                    Sales</h6>
                                 <div class="d-flex d-lg-block d-xl-flex align-items-end justify-content-center">
-                                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1 tx-28">{{ $total_shops }}</h3>
+                                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1 tx-28">{{ $currency.$total_sales }}</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-4 col-lg-3">
                             <div class="card card-body text-center">
-                                <h6 class="tx-uppercase tx-15 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Shop
-                                    Users</h6>
+                                <h6 class="tx-uppercase tx-15 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Net
+                                    Sales</h6>
                                 <div class="d-flex d-lg-block d-xl-flex align-items-end justify-content-center">
-                                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1 tx-28">{{ $total_users }}</h3>
+                                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1 tx-28">{{ $currency.$net_sales }}</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-4 col-lg-3">
                             <div class="card card-body text-center">
-                                <h6 class="tx-uppercase tx-15 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total
-                                    Customers</h6>
+                                <h6 class="tx-uppercase tx-15 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Orders</h6>
                                 <div class="d-flex d-lg-block d-xl-flex align-items-end justify-content-center">
-                                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1 tx-28">{{ $total_customers }}</h3>
+                                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1 tx-28">{{ $total_orders }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-lg-3">
+                            <div class="card card-body text-center">
+                                <h6 class="tx-uppercase tx-15 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Items
+                                    Sold</h6>
+                                <div class="d-flex d-lg-block d-xl-flex align-items-end justify-content-center">
+                                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1 tx-28">{{ $total_items_sold }}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endif
+                <div class="row row-xs mt-2">
+                    <div class="col-sm-12 col-lg-12">
+                        <h4>Top Products - Items Sold</h4>
+                        <div class="card card-body dataTableBox">
+                            <div class="table-responsive">
+                                <table id="datatable-{{$module}}" width="100%" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Items Sold</th>
+                                        <th>Net Sales</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($data_table_items as $column)
+                                        <tr>
+                                            <td>{{ $column->title }}</td>
+                                            <td>{{ $column->items_sold }}</td>
+                                            <td>{{ $currency.$column->net_sales }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row row-xs mt-2">
                     <div class="col-sm-12 col-lg-12">
                         <div class="card card-body dataTableBox">
@@ -70,18 +111,17 @@
 
         @push('custom-scripts')
 
+
             <script type="text/javascript">
 
                 $(function () {
 
-                    $('input[name="date_range"]').daterangepicker({
+                    $('input[name="daterange"]').daterangepicker({
                         opens: 'left'
                     }, function (start, end, label) {
-                        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                        location.replace('{{ url("/") }}?start='+ start.format('YYYY-MM-DD') + '&end=' + end.format('YYYY-MM-DD'));
                     });
-
                 });
-
             </script>
 
     @endpush

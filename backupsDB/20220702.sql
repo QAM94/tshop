@@ -12,8 +12,31 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for function tshop.CalcIncome
+DELIMITER //
+CREATE FUNCTION `CalcIncome`() RETURNS int(11)
+BEGIN
+
+   DECLARE str1 VARCHAR(100);
+	DECLARE str2 VARCHAR(100);
+
+   SET str1 = ' 14700 West Park Ave';
+	SET str2 = ' 14700 West Park Ave';
+	
+	IF(SOUNDEX(str1) = SOUNDEX(str2)) THEN
+		RETURN 1;
+	END IF;
+	
+
+   RETURN 0;
+	
+
+   
+
+END//
+DELIMITER ;
+
 -- Dumping structure for table tshop.categories
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) DEFAULT '0',
@@ -35,7 +58,6 @@ INSERT INTO `categories` (`id`, `parent_id`, `title`, `is_popular`, `is_active`,
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.category_products
-DROP TABLE IF EXISTS `category_products`;
 CREATE TABLE IF NOT EXISTS `category_products` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) unsigned NOT NULL,
@@ -45,9 +67,9 @@ CREATE TABLE IF NOT EXISTS `category_products` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table tshop.category_products: ~7 rows (approximately)
+-- Dumping data for table tshop.category_products: ~11 rows (approximately)
 DELETE FROM `category_products`;
 /*!40000 ALTER TABLE `category_products` DISABLE KEYS */;
 INSERT INTO `category_products` (`id`, `product_id`, `category_id`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -57,37 +79,72 @@ INSERT INTO `category_products` (`id`, `product_id`, `category_id`, `is_active`,
 	(4, 4, 2, 1, '2022-06-08 22:20:11', '2022-06-08 22:20:11', NULL),
 	(5, 5, 2, 1, '2022-07-02 23:35:43', '2022-07-02 23:35:43', NULL),
 	(6, 6, 2, 1, '2022-07-02 23:36:25', '2022-07-02 23:36:25', NULL),
-	(7, 7, 2, 1, '2022-07-02 23:45:10', '2022-07-02 23:45:10', NULL);
+	(7, 7, 2, 1, '2022-07-02 23:45:10', '2022-07-02 23:45:10', NULL),
+	(8, 8, 2, 1, '2022-07-08 23:59:38', '2022-07-08 23:59:38', NULL),
+	(9, 9, 2, 1, '2022-07-08 23:59:49', '2022-07-08 23:59:49', NULL),
+	(10, 10, 2, 1, '2022-07-26 23:08:40', '2022-07-26 23:08:40', NULL),
+	(13, 13, 2, 1, '2022-07-26 23:11:10', '2022-07-26 23:11:10', NULL);
 /*!40000 ALTER TABLE `category_products` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.customers
-DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `shop_id` int(11) DEFAULT NULL,
+  `shop_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `phone_number` varchar(45) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tshop.customers: ~5 rows (approximately)
+-- Dumping data for table tshop.customers: ~15 rows (approximately)
 DELETE FROM `customers`;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` (`id`, `shop_id`, `phone_number`, `email`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 2, '+923142558569', 'customer1@yopmail.com', 'QCustomer', '2022-05-24 12:49:18', '2022-05-24 12:49:18', NULL),
-	(2, 1, '+123456789', 'tese_new@yopmail.com', 'Test New', '2022-06-21 16:20:16', '2022-06-21 16:20:16', NULL),
-	(3, 1, '+1234567891', 'test_new@yopmail.com', 'Test New', '2022-06-27 21:25:13', '2022-06-27 21:25:13', NULL),
-	(4, 1, '+1234567891', 'test_new@yopmail.com', 'Test New', '2022-06-27 21:26:46', '2022-06-27 21:26:46', NULL),
-	(5, 1, 'newq@yopmail.com', NULL, 'Test Newq', '2022-07-02 14:57:07', '2022-07-02 14:57:07', NULL);
+INSERT INTO `customers` (`id`, `shop_id`, `name`, `phone_number`, `email`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 2, 'QCustomer', '+923142558569', 'customer1@yopmail.com', '2022-05-24 12:49:18', '2022-05-24 12:49:18', NULL),
+	(2, 1, 'Test New', '+123456789', 'tese_new@yopmail.com', '2022-06-21 16:20:16', '2022-06-21 16:20:16', NULL),
+	(3, 1, 'Test New', '+1234567891', 'test_new@yopmail.com', '2022-06-27 21:25:13', '2022-06-27 21:25:13', NULL),
+	(4, 1, 'Test New', '+1234567891', 'test_new@yopmail.com', '2022-06-27 21:26:46', '2022-06-27 21:26:46', NULL),
+	(5, 1, 'Test Newq', 'newq@yopmail.com', NULL, '2022-07-02 14:57:07', '2022-07-02 14:57:07', NULL),
+	(6, 1, 'Test New', NULL, NULL, '2022-07-09 16:13:50', '2022-07-09 16:13:50', NULL),
+	(7, 1, 'qam test', NULL, NULL, '2022-07-19 21:18:56', '2022-07-29 22:26:30', NULL),
+	(8, 1, 'Test New11', '+111111111', NULL, '2022-07-26 21:10:19', '2022-07-29 22:26:18', NULL),
+	(9, 1, 'Test Newtt', NULL, NULL, '2022-07-29 22:28:12', '2022-07-29 22:28:12', NULL),
+	(10, 1, 'q', NULL, NULL, '2022-07-31 00:12:47', '2022-07-31 00:12:47', NULL),
+	(11, 1, 'w', NULL, NULL, '2022-07-31 01:10:31', '2022-07-31 01:10:31', NULL),
+	(12, 1, 'e', NULL, NULL, '2022-07-31 01:10:58', '2022-07-31 01:10:58', NULL),
+	(13, 1, 'r', NULL, NULL, '2022-07-31 01:21:14', '2022-07-31 01:21:14', NULL),
+	(14, 1, 't', NULL, NULL, '2022-07-31 01:24:55', '2022-07-31 01:24:55', NULL),
+	(15, 2, 'Test Qam', NULL, NULL, '2022-07-31 01:34:14', '2022-07-31 01:34:14', NULL);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 
+-- Dumping structure for function tshop.IncomeLevel
+DELIMITER //
+CREATE FUNCTION `IncomeLevel`( monthly_value INT ) RETURNS varchar(20) CHARSET latin1
+BEGIN
+
+   DECLARE income_level varchar(20);
+
+   IF monthly_value <= 4000 THEN
+      SET income_level = 'Low Income';
+
+   ELSEIF monthly_value > 4000 AND monthly_value <= 7000 THEN
+      SET income_level = 'Avg Income';
+
+   ELSE
+      SET income_level = 'High Income';
+
+   END IF;
+
+   RETURN income_level;
+
+END//
+DELIMITER ;
+
 -- Dumping structure for table tshop.inventories
-DROP TABLE IF EXISTS `inventories`;
 CREATE TABLE IF NOT EXISTS `inventories` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) NOT NULL,
@@ -96,23 +153,26 @@ CREATE TABLE IF NOT EXISTS `inventories` (
   `yards` float DEFAULT NULL,
   `unit` varchar(6) DEFAULT 'gaz',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tshop.inventories: ~7 rows (approximately)
+-- Dumping data for table tshop.inventories: ~11 rows (approximately)
 DELETE FROM `inventories`;
 /*!40000 ALTER TABLE `inventories` DISABLE KEYS */;
 INSERT INTO `inventories` (`id`, `product_id`, `quantity`, `length`, `yards`, `unit`) VALUES
 	(1, 2, 5, 10, 50, NULL),
-	(2, 1, 8, 10, 80, NULL),
-	(3, 3, 5, 10, 50, NULL),
+	(2, 1, -1, 10, -17, NULL),
+	(3, 3, 5, 10, 45, NULL),
 	(4, 4, 2, 10, 16, NULL),
 	(5, 5, 1, 10, 5, 'gaz'),
 	(6, 6, 1, 10, 3, 'gaz'),
-	(7, 7, 2, 10, 20, 'gaz');
+	(7, 7, 1, 10, 5, 'gaz'),
+	(8, 8, 2, 10, 17, NULL),
+	(9, 9, 1, 10, 10, NULL),
+	(10, 10, 3, 10, 30, NULL),
+	(11, 13, 1, 10, 10, 'gaz');
 /*!40000 ALTER TABLE `inventories` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.password_resets
-DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -125,7 +185,6 @@ DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.products
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `shop_id` bigint(20) unsigned NOT NULL,
@@ -139,9 +198,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table tshop.products: ~7 rows (approximately)
+-- Dumping data for table tshop.products: ~13 rows (approximately)
 DELETE FROM `products`;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`id`, `shop_id`, `sku`, `title`, `slug`, `description`, `price`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -151,94 +210,120 @@ INSERT INTO `products` (`id`, `shop_id`, `sku`, `title`, `slug`, `description`, 
 	(4, 1, '444', 'pro4', 'title', 'tedt', 44, 1, '2022-06-08 22:20:11', '2022-06-27 23:04:05', NULL),
 	(5, 2, NULL, 'pro4', NULL, 'tedt', 44, 1, '2022-07-02 23:35:43', '2022-07-02 23:35:43', NULL),
 	(6, 3, NULL, 'pro4', NULL, 'tedt', 44, 1, '2022-07-02 23:36:25', '2022-07-02 23:36:25', NULL),
-	(7, 1, NULL, 'pro1', NULL, 'test', 2, 1, '2022-07-02 23:45:10', '2022-07-02 23:45:10', NULL);
+	(7, 1, NULL, 'pro1', NULL, 'test', 2, 1, '2022-07-02 23:45:10', '2022-07-02 23:45:10', NULL),
+	(8, 1, '2145', 'Fabric 1', 'title', 'Test', 22, 1, '2022-07-08 23:59:38', '2022-07-08 23:59:38', NULL),
+	(9, 2, NULL, 'Fabric 1', 'title', 'Test', 22, 1, '2022-07-08 23:59:49', '2022-07-09 00:18:15', NULL),
+	(10, 1, '21454', 'new new', 'title', 'test', 12, 1, '2022-07-26 23:08:40', '2022-07-26 23:08:40', NULL),
+	(11, 2, NULL, 'new new', NULL, 'test', 12, 1, '2022-07-26 23:08:54', '2022-07-26 23:09:38', '2022-07-26 23:09:38'),
+	(12, 2, NULL, 'new new', NULL, 'test', 12, 1, '2022-07-26 23:10:05', '2022-07-26 23:10:55', '2022-07-26 23:10:55'),
+	(13, 2, NULL, 'new new', NULL, 'test', 12, 1, '2022-07-26 23:11:10', '2022-07-26 23:11:10', NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.receipts
-DROP TABLE IF EXISTS `receipts`;
 CREATE TABLE IF NOT EXISTS `receipts` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `receipt_no` varchar(50) DEFAULT NULL,
   `shop_id` bigint(20) NOT NULL,
-  `customer_id` bigint(20) DEFAULT NULL,
+  `customer_id` bigint(20) NOT NULL,
   `sub_total` float DEFAULT NULL,
   `discount` float DEFAULT NULL,
+  `vat` float DEFAULT NULL,
   `total` float DEFAULT NULL,
   `advance_payment` float DEFAULT '0',
   `remaining_payment` float DEFAULT NULL,
   `description` text,
+  `items_sold_qty` varchar(50) DEFAULT '0',
+  `own_cloth` tinyint(1) DEFAULT '0',
+  `is_delivered` tinyint(1) DEFAULT '0',
   `is_active` tinyint(1) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tshop.receipts: ~17 rows (approximately)
+-- Dumping data for table tshop.receipts: ~27 rows (approximately)
 DELETE FROM `receipts`;
 /*!40000 ALTER TABLE `receipts` DISABLE KEYS */;
-INSERT INTO `receipts` (`id`, `receipt_no`, `shop_id`, `customer_id`, `sub_total`, `discount`, `total`, `advance_payment`, `remaining_payment`, `description`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, '11', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2022-06-08 17:51:27', '2022-06-08 17:51:27', NULL),
-	(2, '12', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-06-08 17:53:57', '2022-06-08 17:53:57', NULL),
-	(3, '13', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-06-08 17:54:49', '2022-06-08 17:54:49', NULL),
-	(4, '14', 2, 1, 22, 0, 22, NULL, NULL, NULL, 1, '2022-06-08 22:24:38', '2022-06-10 23:17:43', NULL),
-	(5, '15', 2, 1, 6, 0, 6, NULL, NULL, NULL, 1, '2022-06-08 22:26:38', '2022-06-10 23:17:25', NULL),
-	(6, '16', 2, 1, 46, 0, 46, NULL, NULL, NULL, 1, '2022-06-08 22:40:36', '2022-06-10 23:17:19', NULL),
-	(7, '17', 2, 1, 90, 0, 90, NULL, NULL, NULL, 1, '2022-06-08 22:44:55', '2022-06-10 23:17:03', NULL),
-	(8, '18', 2, 1, 30, 2, 28, NULL, NULL, NULL, 1, '2022-06-10 22:58:49', '2022-06-10 23:16:29', NULL),
-	(9, '19', 2, 1, 2, NULL, 2, NULL, NULL, NULL, 0, '2022-06-13 21:57:02', '2022-06-13 21:57:02', NULL),
-	(10, '110', 2, 1, 2, NULL, 2, NULL, NULL, NULL, 0, '2022-06-13 22:00:35', '2022-06-13 22:00:35', NULL),
-	(11, '111', 2, 1, 4, NULL, 4, NULL, NULL, NULL, 0, '2022-06-13 22:01:13', '2022-06-13 22:01:13', NULL),
-	(12, '112', 2, 1, 20, NULL, 20, NULL, NULL, NULL, 0, '2022-06-13 22:01:58', '2022-06-13 22:01:58', NULL),
-	(13, '213', 1, 2, 44, 0, 44, NULL, NULL, NULL, 1, '2022-06-21 16:20:16', '2022-06-30 21:50:20', NULL),
-	(14, '114', 2, 1, 5, 0.5, 4.5, NULL, NULL, NULL, 1, '2022-06-21 17:13:00', '2022-06-21 21:27:52', NULL),
-	(15, 'test123ll', 1, 3, 100, 0, 100, NULL, 100, NULL, 1, '2022-06-27 21:25:13', '2022-07-02 16:00:32', NULL),
-	(16, 'test123q', 1, 4, 55, 10, 45, 21, 24, NULL, 1, '2022-06-27 21:26:46', '2022-06-30 23:21:23', NULL),
-	(17, 'test123ff', 1, 5, 110, 5, 105, 100, 5, 'qmaaaa', 1, '2022-07-02 14:57:07', '2022-07-02 23:19:20', NULL);
+INSERT INTO `receipts` (`id`, `receipt_no`, `shop_id`, `customer_id`, `sub_total`, `discount`, `vat`, `total`, `advance_payment`, `remaining_payment`, `description`, `items_sold_qty`, `own_cloth`, `is_delivered`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, '11', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '2022-06-08 17:51:27', '2022-06-08 17:51:27', NULL),
+	(2, '12', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-08 17:53:57', '2022-06-08 17:53:57', NULL),
+	(3, '13', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-08 17:54:49', '2022-06-08 17:54:49', NULL),
+	(4, '14', 2, 1, 22, 0, NULL, 22, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-08 22:24:38', '2022-06-10 23:17:43', NULL),
+	(5, '15', 2, 1, 6, 0, NULL, 6, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-08 22:26:38', '2022-06-10 23:17:25', NULL),
+	(6, '16', 2, 1, 46, 0, NULL, 46, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-08 22:40:36', '2022-06-10 23:17:19', NULL),
+	(7, '17', 2, 1, 90, 0, NULL, 90, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-08 22:44:55', '2022-06-10 23:17:03', NULL),
+	(8, '18', 2, 1, 30, 2, NULL, 28, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-10 22:58:49', '2022-06-10 23:16:29', NULL),
+	(9, '19', 2, 1, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 0, 0, 0, '2022-06-13 21:57:02', '2022-06-13 21:57:02', NULL),
+	(10, '110', 2, 1, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 0, 0, 0, '2022-06-13 22:00:35', '2022-06-13 22:00:35', NULL),
+	(11, '111', 2, 1, 4, NULL, NULL, 4, NULL, NULL, NULL, NULL, 0, 0, 0, '2022-06-13 22:01:13', '2022-06-13 22:01:13', NULL),
+	(12, '112', 2, 1, 20, NULL, NULL, 20, NULL, NULL, NULL, NULL, 0, 0, 0, '2022-06-13 22:01:58', '2022-06-13 22:01:58', NULL),
+	(13, '213', 1, 2, 44, 0, NULL, 44, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-21 16:20:16', '2022-06-30 21:50:20', NULL),
+	(14, '114', 2, 1, 5, 0.5, NULL, 4.5, NULL, NULL, NULL, NULL, 0, 0, 1, '2022-06-21 17:13:00', '2022-06-21 21:27:52', NULL),
+	(15, 'test123ll', 1, 3, 100, 0, NULL, 100, NULL, 100, NULL, NULL, 0, 0, 1, '2022-06-27 21:25:13', '2022-07-02 16:00:32', NULL),
+	(16, 'test123q', 1, 4, 55, 10, 0, 45, 21, 24, NULL, NULL, 0, 0, 1, '2022-06-27 21:26:46', '2022-07-08 23:42:51', NULL),
+	(17, 'test123ff', 1, 5, 110, 5, 2, 107, 100, 7, '<ol><li><b>qmaaaas</b></li></ol>', '2', 0, 1, 1, '2022-07-02 14:57:07', '2022-07-26 23:13:05', NULL),
+	(18, NULL, 2, 1, 48, 0, 0, 48, 3, 45, '<p><br></p><p><br></p><ol><li>Test124</li></ol>', '1', 0, 0, 1, '2022-07-09 14:36:19', '2022-07-09 22:06:05', NULL),
+	(19, 'rrrrrr', 1, 6, 44, 0, 0, 44, 0, 44, NULL, NULL, 1, 0, 1, '2022-07-09 16:13:50', '2022-07-09 21:51:18', NULL),
+	(20, 'test123rr', 1, 4, 88, 0, 0, 88, 0, 88, NULL, '2', 0, 0, 1, '2022-07-19 21:18:56', '2022-07-29 22:22:44', NULL),
+	(21, 'test123', 1, 2, 22, 0, 0, 22, 0, 22, NULL, '1', 1, 1, 1, '2022-07-26 21:10:19', '2022-07-29 22:22:36', NULL),
+	(22, 'test123gg', 1, 9, 26, 0, 0, 26, 0, 26, NULL, '0', 0, 0, 1, '2022-07-29 22:28:12', '2022-07-29 22:28:48', NULL),
+	(23, '12121212', 1, 10, 2, 0, 0, 2, 0, 2, NULL, NULL, 0, 0, 1, '2022-07-31 00:12:47', '2022-07-31 00:12:47', NULL),
+	(24, '12346', 1, 13, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, 0, 0, 1, '2022-07-31 01:21:14', '2022-07-31 01:21:14', NULL),
+	(25, NULL, 1, 14, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, 0, 0, 1, '2022-07-31 01:24:55', '2022-07-31 01:24:55', NULL),
+	(26, NULL, 1, 2, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, 0, 0, 1, '2022-07-31 01:33:32', '2022-07-31 01:33:32', NULL),
+	(27, NULL, 2, 15, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, 0, 0, 1, '2022-07-31 01:34:14', '2022-07-31 01:34:14', NULL);
 /*!40000 ALTER TABLE `receipts` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.receipt_details
-DROP TABLE IF EXISTS `receipt_details`;
 CREATE TABLE IF NOT EXISTS `receipt_details` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `receipt_id` bigint(20) DEFAULT NULL,
   `product_id` bigint(20) DEFAULT NULL,
   `yards` float DEFAULT NULL,
+  `items_sold` int(11) DEFAULT NULL,
   `unit_price` float DEFAULT '0',
   `unit` varchar(6) DEFAULT 'gaz',
   `price` float DEFAULT '0',
   `remaining_payment` float DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tshop.receipt_details: ~20 rows (approximately)
+-- Dumping data for table tshop.receipt_details: ~28 rows (approximately)
 DELETE FROM `receipt_details`;
 /*!40000 ALTER TABLE `receipt_details` DISABLE KEYS */;
-INSERT INTO `receipt_details` (`id`, `receipt_id`, `product_id`, `yards`, `unit_price`, `unit`, `price`, `remaining_payment`) VALUES
-	(1, 1, 1, 2, 2, NULL, NULL, 0),
-	(2, 3, 1, 2, 2, NULL, NULL, 0),
-	(3, 6, 1, 1, 2, NULL, 2, 0),
-	(4, 2, 1, 2, 2, NULL, NULL, 0),
-	(5, 2, 3, 1, 22, NULL, NULL, 0),
-	(6, 6, 3, 2, 22, NULL, 44, 0),
-	(7, 7, 1, 1, 2, NULL, 2, 0),
-	(8, 7, 3, 4, 22, NULL, 88, 0),
-	(9, 5, 1, 3, 2, NULL, 6, 0),
-	(10, 8, 1, 4, NULL, 'meter', 8, 0),
-	(11, 8, 3, 1, NULL, 'meter', 22, 0),
-	(12, 4, 2, 1, NULL, NULL, 22, 0),
-	(13, 9, 1, 1, NULL, 'meter', 2, 0),
-	(14, 10, 1, 1, NULL, 'meter', 2, 0),
-	(17, 13, 2, 1, NULL, 'meter', 22, 0),
-	(18, 14, 1, 2.5, NULL, 'meter', 5, 0),
-	(20, 16, 3, 2.5, 0, 'gaz', 55, 0),
-	(21, 13, 4, 1, 0, 'gaz', 44, 0),
-	(22, 17, 3, 1, 0, 'gaz', 22, 0),
-	(24, 17, 4, 2, 0, 'gaz', 22, 0);
+INSERT INTO `receipt_details` (`id`, `receipt_id`, `product_id`, `yards`, `items_sold`, `unit_price`, `unit`, `price`, `remaining_payment`) VALUES
+	(1, 1, 1, 2, NULL, 2, NULL, NULL, 0),
+	(2, 3, 1, 2, NULL, 2, NULL, NULL, 0),
+	(3, 6, 1, 1, NULL, 2, NULL, 2, 0),
+	(4, 2, 1, 2, NULL, 2, NULL, NULL, 0),
+	(5, 2, 3, 1, NULL, 22, NULL, NULL, 0),
+	(6, 6, 3, 2, NULL, 22, NULL, 44, 0),
+	(7, 7, 1, 1, NULL, 2, NULL, 2, 0),
+	(8, 7, 3, 4, NULL, 22, NULL, 88, 0),
+	(9, 5, 1, 3, NULL, 2, NULL, 6, 0),
+	(10, 8, 1, 4, NULL, NULL, 'meter', 8, 0),
+	(11, 8, 3, 1, NULL, NULL, 'meter', 22, 0),
+	(12, 4, 2, 1, NULL, NULL, NULL, 22, 0),
+	(13, 9, 1, 1, NULL, NULL, 'meter', 2, 0),
+	(14, 10, 1, 1, NULL, NULL, 'meter', 2, 0),
+	(17, 13, 2, 1, NULL, NULL, 'meter', 22, 0),
+	(18, 14, 1, 2.5, NULL, NULL, 'meter', 5, 0),
+	(20, 16, 3, 2.5, NULL, 0, 'gaz', 55, 0),
+	(21, 13, 4, 1, NULL, 0, 'gaz', 44, 0),
+	(22, 17, 3, 1, NULL, 0, 'gaz', 22, 0),
+	(24, 17, 4, 2, NULL, 0, 'gaz', 22, 0),
+	(25, 18, 1, 24, NULL, 0, 'gaz', 48, 0),
+	(27, 20, 8, 3, 1, 0, 'gaz', 66, 0),
+	(28, 19, 3, 2, 1, 0, 'gaz', 44, 0),
+	(29, 20, 3, 1, 1, 0, 'gaz', 66, 0),
+	(30, 21, 3, 1, 1, 0, 'gaz', 22, 0),
+	(31, 22, 3, 1, 1, 0, 'gaz', 22, 0),
+	(32, 22, 7, 2, 1, 0, 'gaz', 4, 0),
+	(33, 23, 7, 1, 0, 0, 'gaz', 2, 0);
 /*!40000 ALTER TABLE `receipt_details` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.sales_purchases
-DROP TABLE IF EXISTS `sales_purchases`;
 CREATE TABLE IF NOT EXISTS `sales_purchases` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `shop_id` bigint(20) DEFAULT NULL,
@@ -251,9 +336,9 @@ CREATE TABLE IF NOT EXISTS `sales_purchases` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tshop.sales_purchases: ~16 rows (approximately)
+-- Dumping data for table tshop.sales_purchases: ~25 rows (approximately)
 DELETE FROM `sales_purchases`;
 /*!40000 ALTER TABLE `sales_purchases` DISABLE KEYS */;
 INSERT INTO `sales_purchases` (`id`, `shop_id`, `product_id`, `type`, `quantity`, `price`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -272,11 +357,19 @@ INSERT INTO `sales_purchases` (`id`, `shop_id`, `product_id`, `type`, `quantity`
 	(13, 1, 3, 'sale', 2.5, 22, 1, '2022-07-02 14:57:07', '2022-07-02 14:57:07', NULL),
 	(14, 1, 4, 'sale', 1, 44, 1, '2022-07-02 14:57:07', '2022-07-02 14:57:07', NULL),
 	(15, 1, 3, 'sale', 1, 22, 1, '2022-07-02 14:57:07', '2022-07-02 14:57:07', NULL),
-	(16, 1, 4, 'sale', 2, 44, 1, '2022-07-02 23:28:09', '2022-07-02 23:28:09', NULL);
+	(16, 1, 4, 'sale', 2, 44, 1, '2022-07-02 23:28:09', '2022-07-02 23:28:09', NULL),
+	(17, 2, 1, 'sale', 24, 2, 1, '2022-07-09 14:36:20', '2022-07-09 14:36:20', NULL),
+	(18, 1, 3, 'sale', 2, 22, 1, '2022-07-09 16:13:50', '2022-07-09 16:13:50', NULL),
+	(19, 1, 8, 'sale', 3, 22, 1, '2022-07-19 21:18:56', '2022-07-19 21:18:56', NULL),
+	(20, 1, 3, 'sale', 2, 22, 1, '2022-07-19 21:21:04', '2022-07-19 21:21:04', NULL),
+	(21, 1, 3, 'sale', 1, 22, 1, '2022-07-19 21:52:35', '2022-07-19 21:52:35', NULL),
+	(22, 1, 3, 'sale', 1, 22, 1, '2022-07-26 21:10:19', '2022-07-26 21:10:19', NULL),
+	(23, 1, 3, 'sale', 1, 22, 1, '2022-07-29 22:28:48', '2022-07-29 22:28:48', NULL),
+	(24, 1, 7, 'sale', 2, 2, 1, '2022-07-29 22:28:48', '2022-07-29 22:28:48', NULL),
+	(25, 1, 7, 'sale', 1, 2, 1, '2022-07-31 00:12:47', '2022-07-31 00:12:47', NULL);
 /*!40000 ALTER TABLE `sales_purchases` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.shops
-DROP TABLE IF EXISTS `shops`;
 CREATE TABLE IF NOT EXISTS `shops` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -294,13 +387,12 @@ CREATE TABLE IF NOT EXISTS `shops` (
 DELETE FROM `shops`;
 /*!40000 ALTER TABLE `shops` DISABLE KEYS */;
 INSERT INTO `shops` (`id`, `name`, `email`, `contact`, `address`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Shop 1', 'shop1@yopmail.com', '+1111111111', 'test', 1, '2022-05-23 21:50:48', '2022-05-24 10:52:06', NULL),
+	(1, 'Shop 1', 'shop1@yopmail.com', '+1111111111', '157 E. Elizabeth St. Montgomery Village, MD 20886', 1, '2022-05-23 21:50:48', '2022-08-22 22:10:07', NULL),
 	(2, 'QShop', 'qshop@yopmail.com', '+11111111111', 'test', 1, '2022-05-24 12:38:07', '2022-05-24 12:38:07', NULL),
 	(3, 'Test New', 'shopneww@tshop.com', '+1234567898', 'twsttttt', 1, '2022-06-25 23:36:03', '2022-06-25 23:36:03', NULL);
 /*!40000 ALTER TABLE `shops` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.shop_users
-DROP TABLE IF EXISTS `shop_users`;
 CREATE TABLE IF NOT EXISTS `shop_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `shop_id` bigint(20) NOT NULL,
@@ -315,8 +407,56 @@ INSERT INTO `shop_users` (`id`, `shop_id`, `user_id`) VALUES
 	(1, 1, 8);
 /*!40000 ALTER TABLE `shop_users` ENABLE KEYS */;
 
+-- Dumping structure for function tshop.similarityChk
+DELIMITER //
+CREATE FUNCTION `similarityChk`() RETURNS varchar(100) CHARSET latin1
+BEGIN
+   DECLARE str1 VARCHAR(100);
+	DECLARE str2 VARCHAR(100);
+   DECLARE sd1 VARCHAR(20);
+	DECLARE sd2 VARCHAR(20);
+
+   SET str1 = ' 14700 W Park Ave';
+	SET str2 = ' 14700, West Park AVENUE.';
+	SET sd1 = SOUNDEX(str1);
+	SET sd2 = SOUNDEX(str2);	
+	
+	IF(sd1 = sd2 OR sd1 LIKE CONCAT('%', sd2 ,'%') OR sd2 LIKE CONCAT('%', sd1 ,'%')) THEN
+		RETURN TRUE;
+	END IF;
+	
+	SET str1 = REPLACE(str1, ' ', '%');
+	SET str2 = REPLACE(str2, ' ', '%');
+	
+	IF(str1 = str2 OR str1 LIKE CONCAT('%',str2,'%') OR str2 LIKE CONCAT('%',str1,'%')) THEN
+		RETURN TRUE;
+	END IF;
+	
+	SET str1 = REPLACE(LOWER(RTRIM(str1)), ',', '');
+	SET str2 = REPLACE(LOWER(RTRIM(str2)), ',', '');
+	
+	SET str1 = REPLACE(str1, '.', '');
+	SET str2 = REPLACE(str2, '.', '');
+	
+	SET str1 = REPLACE(str1, ' road', ' rd');
+	SET str2 = REPLACE(str2, ' road', ' rd');
+	
+	SET str1 = REPLACE(str1, ' lane', ' ln');
+	SET str2 = REPLACE(str2, ' lane', ' ln');
+	
+	SET str1 = REPLACE(str1, ' avenue', ' ave');
+	SET str2 = REPLACE(str2, ' avenue', ' ave');
+	
+	IF(str1 = str2 OR str1 LIKE CONCAT('%',str2,'%') OR str2 LIKE CONCAT('%',str1,'%')) THEN
+		RETURN TRUE;
+	END IF;
+	
+	RETURN FALSE;
+
+END//
+DELIMITER ;
+
 -- Dumping structure for table tshop.system_modules
-DROP TABLE IF EXISTS `system_modules`;
 CREATE TABLE IF NOT EXISTS `system_modules` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -353,7 +493,6 @@ INSERT INTO `system_modules` (`id`, `title`, `slug`, `route_name`, `icon`, `clas
 /*!40000 ALTER TABLE `system_modules` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.system_roles
-DROP TABLE IF EXISTS `system_roles`;
 CREATE TABLE IF NOT EXISTS `system_roles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -375,7 +514,6 @@ INSERT INTO `system_roles` (`id`, `title`, `slug`, `is_superadmin`, `is_active`,
 /*!40000 ALTER TABLE `system_roles` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.system_role_permissions
-DROP TABLE IF EXISTS `system_role_permissions`;
 CREATE TABLE IF NOT EXISTS `system_role_permissions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `system_module` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -426,7 +564,6 @@ INSERT INTO `system_role_permissions` (`id`, `system_module`, `system_role`, `is
 /*!40000 ALTER TABLE `system_role_permissions` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.system_settings
-DROP TABLE IF EXISTS `system_settings`;
 CREATE TABLE IF NOT EXISTS `system_settings` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `label` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -449,7 +586,6 @@ INSERT INTO `system_settings` (`id`, `label`, `slug`, `value`, `input_type`, `he
 /*!40000 ALTER TABLE `system_settings` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.system_statistics
-DROP TABLE IF EXISTS `system_statistics`;
 CREATE TABLE IF NOT EXISTS `system_statistics` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -472,7 +608,6 @@ DELETE FROM `system_statistics`;
 /*!40000 ALTER TABLE `system_statistics` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.system_statuses
-DROP TABLE IF EXISTS `system_statuses`;
 CREATE TABLE IF NOT EXISTS `system_statuses` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -490,7 +625,6 @@ DELETE FROM `system_statuses`;
 /*!40000 ALTER TABLE `system_statuses` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.uploads
-DROP TABLE IF EXISTS `uploads`;
 CREATE TABLE IF NOT EXISTS `uploads` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `model_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -517,7 +651,6 @@ INSERT INTO `uploads` (`id`, `model_name`, `model_ref_id`, `ref_name`, `source`,
 /*!40000 ALTER TABLE `uploads` ENABLE KEYS */;
 
 -- Dumping structure for table tshop.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `role` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT 'shop',

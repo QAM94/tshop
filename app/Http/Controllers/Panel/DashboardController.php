@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Receipt;
+use App\Models\ReceiptDetail;
 use App\Models\Shop;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -14,22 +17,50 @@ class DashboardController extends Controller
     {
         $this->dataAssign['module'] = 'dashboard';
         $this->shop_model = new Shop();
+        $this->receipt_model = new ReceiptDetail();
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        $range = 0;
+        if (!empty($request->start) && !empty($request->end)) {
+            $range = 1;
+        }
         if (auth()->user()->role == 'admin') {
             $data['module'] = $this->dataAssign['module'];
-            $data['total_shops'] = Shop::where('is_active', '1')->count();
-            $data['total_users'] = User::where(['role' => 'shop', 'is_active' => '1'])->count();
-            $data['total_customers'] = Customer::count();
+            $rangeArr = [];
+            if (!empty($request->start) && !empty($request->end)) {
+                $rangeArr = [$request->start, $request->end];
+                $data['total_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->whereBetween('created_at', $rangeArr)
+                    ->sum('total');
+                $data['net_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->whereBetween('created_at', $rangeArr)
+                    ->sum('sub_total');
+                $data['total_orders'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->whereBetween('created_at', $rangeArr)
+                    ->count();
+                $data['total_items_sold'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->whereBetween('created_at', $rangeArr)
+                    ->sum('items_sold_qty');
+            } else {
+                $data['total_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->sum('total');
+                $data['net_sales'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->sum('sub_total');
+                $data['total_orders'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->count();
+                $data['total_items_sold'] = Receipt::whereNull('deleted_at')->where(['is_active' => 1])
+                    ->sum('items_sold_qty');
+            }
+
+            $data['data_table_items'] = $this->receipt_model->getItemsTableData($rangeArr);
             $data['data_table_shops'] = $this->shop_model->getDashboardTableData();
             $data['route_name_for_listing'] = $data['module'] . '.ajaxListing';
             return view($this->layout_base . '.' . $this->dataAssign['module'] . '.show', $data);
         }
         if (auth()->user()->role == 'store') {
             $data['module'] = $this->dataAssign['module'];
-          //  $data['data_table_columns'] = $this->recall_model->getColumnsForDataTable();
             $data['route_name_for_listing'] = $data['module'] . '.storeAjaxListing';
             return view($this->layout_base . '.' . $this->dataAssign['module'] . '.show', $data);
         }
@@ -76,7 +107,7 @@ class DashboardController extends Controller
 
     public function checkAuth()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return User::find(Auth::id())->is_logout;
         }
         return 1;
